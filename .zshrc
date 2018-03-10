@@ -1,4 +1,6 @@
-# Path to your oh-my-zsh installation.
+export TERM="xterm-256color"
+
+# Path to oh-my-zsh installation
 export ZSH=$HOME/.oh-my-zsh
 
 DISABLE_AUTO_TITLE="true"
