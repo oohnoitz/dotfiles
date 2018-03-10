@@ -28,7 +28,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export PATH="$HOME/.pyenv/bin:$PATH"
 
-alias config='/usr/bin/git --git-dir=$HOME/workspace/personal/dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
