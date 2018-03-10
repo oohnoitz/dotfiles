@@ -7,7 +7,6 @@ DISABLE_AUTO_TITLE="true"
 POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(
-  git
   colored-man-pages
 )
 
@@ -36,5 +35,8 @@ eval "$(pyenv virtualenv-init -)"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.config/zsh/fzf-asdf.zsh ] && source ~/.config/zsh/fzf-asdf.zsh
+[ -f ~/.config/zsh/fzf-git.zsh ] && source ~/.config/zsh/fzf-git.zsh
+[ -f ~/.config/zsh/fzf-zsh.zsh ] && source ~/.config/zsh/fzf-zsh.zsh
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
