@@ -28,12 +28,13 @@ POWERLEVEL9K_DIR_PATH_SEPARATOR="%F{black} $(print_icon 'LEFT_SUBSEGMENT_SEPARAT
 export EDITOR="nvim"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export PATH="$HOME/.pyenv/bin:$PATH"
-
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
