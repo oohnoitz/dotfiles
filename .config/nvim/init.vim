@@ -7,13 +7,16 @@ let g:dein_git = 'https://github.com/Shougo/dein.vim.git'
 let g:dein_dir = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_debug = 1
-let g:deoplete#enable_profile = 1
 let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#filter = 0
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
+
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
 
 let g:echodoc#enable_at_startup = 1
 
@@ -22,6 +25,20 @@ let g:gitgutter_diff_args = '-w'
 let g:ale_fixers = {
 \  'javascript': ['eslint'],
 \}
+
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+
+let g:fzf_colors = {
+\   'bg+':     ['bg', 'Normal'],
+\   'fg+':     ['fg', 'Statement'],
+\   'hl':      ['fg', 'Underlined'],
+\   'hl+':     ['fg', 'Underlined'],
+\   'info':    ['fg', 'MatchParen'],
+\   'pointer': ['fg', 'Special'],
+\   'prompt':  ['fg', 'Normal'],
+\   'marker':  ['fg', 'MatchParen']
+\ }
 
 exec 'set runtimepath^='.g:dein_dir
 
@@ -55,6 +72,7 @@ call dein#add('ryanoasis/vim-devicons')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('majutsushi/tagbar')
 call dein#add('moll/vim-bbye')
+call dein#add('jiangmiao/auto-pairs')
 
 call dein#end()
 
@@ -93,6 +111,8 @@ set nobackup
 set noswapfile
 set undofile
 set undodir=~/.nvim/undo
+set listchars=eol:$,nbsp:_,tab:>-,trail:~,extends:>,precedes:<
+set list
 
 " Theme
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
@@ -107,8 +127,12 @@ exec "hi! Normal ctermbg=NONE guibg=NONE"
 exec "hi! NonText ctermbg=NONE guibg=NONE"
 exec "hi! LineNr ctermbg=NONE guibg=NONE"
 exec "hi! EndOfBuffer ctermbg=NONE guibg=NONE"
+highlight NonText guifg=#3A3A3A
+highlight SpecialKey guifg=#3A3A3A
+highlight ALEErrorSign ctermfg=9 ctermbg=NONE guifg=#C30500 guibg=NONE
+highlight ALEWarningSign ctermfg=11 ctermbg=NONE guifg=#ED6237 guibg=NONE
 
-augroup numbertoggle
+augroup NumberToggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
@@ -139,6 +163,7 @@ nnoremap <Leader>q :Bdelete<CR>
 " EasyMotion: ALE: Lint Navigation
 nmap <A-k> <Plug>(ale_previous_wrap)
 nmap <A-j> <Plug>(ale_next_wrap)
+nmap <Leader>d <Plug>(ale_fix)
 
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
@@ -180,6 +205,5 @@ nnoremap <C-h> <C-w><
 nnoremap <C-l> <C-w>> 
 
 "  Diff
-command ShowUnsaved execute 'w !diff -u % -'
-nnoremap <Leader>w :ShowUnsaved<CR>
+nnoremap <Leader>w :w !diff -u % -<CR>
 nnoremap <F2> :MundoToggle<CR>
