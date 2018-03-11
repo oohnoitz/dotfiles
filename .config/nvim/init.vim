@@ -40,6 +40,12 @@ let g:fzf_colors = {
 \   'marker':  ['fg', 'MatchParen']
 \ }
 
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
+
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_folding_disabled = 1
+
 exec 'set runtimepath^='.g:dein_dir
 
 call dein#begin(expand('~/.cache/dein'))
@@ -73,6 +79,10 @@ call dein#add('easymotion/vim-easymotion')
 call dein#add('majutsushi/tagbar')
 call dein#add('moll/vim-bbye')
 call dein#add('jiangmiao/auto-pairs')
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('reedes/vim-pencil')
+call dein#add('dhruvasagar/vim-table-mode')
 
 call dein#end()
 
@@ -97,7 +107,7 @@ set tabstop=2
 set shiftwidth=2
 
 set foldenable
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
 
 set cursorline
@@ -120,6 +130,7 @@ set number relativenumber
 set termguicolors
 let g:airline_theme = 'base16_oceanicnext'
 let g:airline_powerline_fonts = 1
+let g:airline_section_x = '%{PencilMode()}'
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
@@ -136,6 +147,11 @@ augroup NumberToggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter * set norelativenumber
+augroup END
+
+augroup Pencil
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
 augroup END
 
 " Search
