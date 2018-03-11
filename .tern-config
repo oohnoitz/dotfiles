@@ -1,5 +1,14 @@
 {
+  "libs": [
+    "browser",
+    "chai",
+    "ecmascript",
+    "jquery",
+    "react"
+  ],
   "plugins": {
-    "node": {}
+    "es_modules": {},
+    "node": {},
+    "webpack": {}
   }
 }
