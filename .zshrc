@@ -13,7 +13,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(pyenv status root_indicator)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\e[1D"
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯ "
@@ -29,6 +29,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export PATH="$HOME/.pyenv/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
