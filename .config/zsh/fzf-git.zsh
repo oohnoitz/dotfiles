@@ -39,7 +39,10 @@ gco() {
       --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
     sed 's/^..//' | cut -d' ' -f1 |
     sed 's#^remotes/##')
-  git checkout "$result"
+
+  if [[ $result != "" ]]; then
+    git checkout "$result"
+  fi
 }
 
 # -- COMMIT --------------------------------------------------------------------
