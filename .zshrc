@@ -41,6 +41,6 @@ if [[ -d ~/.config/zsh ]]; then
   for file in ~/.config/zsh/*; do
     source $file
   done
-ef
+fi
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' 
