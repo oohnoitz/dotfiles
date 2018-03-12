@@ -138,8 +138,8 @@ exec "hi! Normal ctermbg=NONE guibg=NONE"
 exec "hi! NonText ctermbg=NONE guibg=NONE"
 exec "hi! LineNr ctermbg=NONE guibg=NONE"
 exec "hi! EndOfBuffer ctermbg=NONE guibg=NONE"
-highlight NonText guifg=#3A3A3A
-highlight SpecialKey guifg=#3A3A3A
+highlight NonText guifg=#4A4A4A
+highlight SpecialKey guifg=#4A4A4A
 highlight ALEErrorSign ctermfg=9 ctermbg=NONE guifg=#C30500 guibg=NONE
 highlight ALEWarningSign ctermfg=11 ctermbg=NONE guifg=#ED6237 guibg=NONE
 
