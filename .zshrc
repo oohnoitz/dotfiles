@@ -37,8 +37,10 @@ eval "$(pyenv virtualenv-init -)"
 . $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-for file in ~/.config/zsh/*; do
-  source $file
-done
+if [[ -d ~/.config/zsh ]]; then
+  for file in ~/.config/zsh/*; do
+    source $file
+  done
+ef
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
