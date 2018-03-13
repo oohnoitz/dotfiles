@@ -30,10 +30,6 @@ alias gau='git add --update'
 # -- BRANCH --------------------------------------------------------------------
 
 gcb() {
-  git checkout -b "$1" 2> /dev/null || git checkout "$1"
-}
-
-gco() {
   result=$(git branch -a --color=always | grep -v '/HEAD\s' | sort |
     fzf-down --ansi --multi --tac --preview-window right:70% \
       --preview 'git log --oneline --graph --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed s/^..// <<< {} | cut -d" " -f1) | head -'$LINES |
@@ -43,6 +39,15 @@ gco() {
   if [[ $result != "" ]]; then
     git checkout "$result"
   fi
+}
+
+gco() {
+  branch=$1
+  if [[ $branch == "" ]]; then
+    branch="master"
+  fi
+
+  git checkout -b "$branch" 2> /dev/null || git checkout "$branch"
 }
 
 # -- COMMIT --------------------------------------------------------------------
