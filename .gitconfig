@@ -19,17 +19,6 @@
 	followTags = true
 	default = current
 
-[user]
-	name = Hung Tran
-	email = hung@0x0.ninja
-	signingkey = 25A90A68
-
-[commit]
-	gpgsign = true
-
-[tag]
-	gpgsign = true
-
 [color]
 	ui = true
 
@@ -62,3 +51,6 @@
 
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
+
+[include]
+	path = ~/.config/git/config
