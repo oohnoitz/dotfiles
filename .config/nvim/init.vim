@@ -234,3 +234,20 @@ nnoremap <C-l> <C-w>>
 "  Diff
 nnoremap <Leader>w :w !diff -u % -<CR>
 nnoremap <F2> :MundoToggle<CR>
+
+"  FZF
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+nnoremap [fzf] <Nop>
+nmap <Leader>f [fzf]
+nnoremap <silent> [fzf]h :History<CR>
+nnoremap <silent> [fzf]l :BLines<CR>
+nnoremap <silent> [fzf]f :Rg<CR>
+nnoremap <silent> [fzf]t :Tags<CR>
+nnoremap <silent> [fzf]g :GFiles<CR>
+nnoremap <silent> [fzf]s :GFiles?<CR>
