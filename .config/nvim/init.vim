@@ -46,6 +46,8 @@ let g:table_mode_header_fillchar='='
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 
+let g:airline#extensions#whitespace#enabled = 0
+
 exec 'set runtimepath^='.g:dein_dir
 
 call dein#begin(expand('~/.cache/dein'))
