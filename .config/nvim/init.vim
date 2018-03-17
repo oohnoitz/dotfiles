@@ -47,6 +47,8 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_splits = 1
 
 exec 'set runtimepath^='.g:dein_dir
 
@@ -171,12 +173,19 @@ inoremap <expr><tab> pumvisible() ? '<C-n>' : '<Tab>'
 
 "  Navigation
 nnoremap <Leader>e :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeFocus<CR>
+nnoremap <Leader>f :NERDTreeFind<CR>
 nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>g :grep<space>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>q :Bdelete<CR>
+
+"  Tab Navigation
+nnoremap tn :tabnew<Space>
+nnoremap tk :tabnext<CR>
+nnoremap tj :tabprev<CR>
+nnoremap th :tabfirst<CR>
+nnoremap tl :tablast<CR>
 
 " EasyMotion: ALE: Lint Navigation
 nmap <A-k> <Plug>(ale_previous_wrap)
