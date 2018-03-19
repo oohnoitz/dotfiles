@@ -71,6 +71,7 @@ alias gdcw='git diff --cached --word-diff'
 alias gdct='git describe --tags `git rev-list --tags --max-count=1`'
 alias gdt='git diff-tree --no-commit-id --name-only -r'
 alias gdw='git diff --word-diff'
+alias gds='git diff HEAD~1 --stat | fpp'
 
 # -- REMOTE --------------------------------------------------------------------
 
