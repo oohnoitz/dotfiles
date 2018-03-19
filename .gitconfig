@@ -7,6 +7,7 @@
 
 	# view current working tree status
 	s = status -s
+	ss = diff HEAD~1 --stat
 
 	# show verbose output
 	tags = tag -l
