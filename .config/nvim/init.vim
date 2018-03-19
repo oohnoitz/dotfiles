@@ -173,7 +173,7 @@ inoremap <expr><tab> pumvisible() ? '<C-n>' : '<Tab>'
 
 "  Navigation
 nnoremap <Leader>e :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeFind<CR>
+nnoremap <Leader>E :NERDTreeFocus<CR>
 nnoremap <Leader>p :Files<CR>
 nnoremap <Leader>g :grep<space>
 nnoremap <Leader>b :Buffers<CR>
