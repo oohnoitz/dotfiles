@@ -9,5 +9,8 @@ Desktop.ini
 ._*
 Thumbs.db
 
+# Tern
+.tern-port
+
 # Personal Dotfiles
 .dotfiles
