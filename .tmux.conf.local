@@ -256,3 +256,10 @@ unbind C-a
 unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
+
+# re-map pane navigation without repeat-time flag
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
