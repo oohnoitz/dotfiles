@@ -32,8 +32,6 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export PATH="$HOME/.pyenv/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -42,6 +40,11 @@ if [[ -d ~/.config/zsh ]]; then
   for file in ~/.config/zsh/*; do
     source $file
   done
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
 fi
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' 
