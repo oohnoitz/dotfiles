@@ -136,7 +136,7 @@ alias gsta='git stash apply'
 alias gstc='git stash clear'
 alias gstd='git stash drop'
 alias gstp='git stash pop'
-alias gsts='git stash show --text'
+alias gstv='git stash show --text'
 
 # -- TAG -----------------------------------------------------------------------
 
