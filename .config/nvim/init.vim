@@ -114,7 +114,6 @@ set foldenable
 set foldmethod=syntax
 set foldlevel=99
 
-set cursorline
 set nowrap
 set noshowmode
 set colorcolumn=80,120
