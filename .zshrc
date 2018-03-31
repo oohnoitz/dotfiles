@@ -4,26 +4,35 @@ export TERM="xterm-256color"
 export ZSH=$HOME/.oh-my-zsh
 
 DISABLE_AUTO_TITLE="true"
-POWERLEVEL9K_MODE='awesome-fontconfig'
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME=""
 plugins=(
   colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\e[1D"
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="❯ "
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_with_package_name"
-POWERLEVEL9K_OS_ICON_BACKGROUND="blue"
-POWERLEVEL9K_OS_ICON_FOREGROUND="black"
+# Theme Prompt
+PROMPT_THEME="$HOME/.config/zsh/themes/pure"
+PROMPT_SETUP_SRC="$PROMPT_THEME/pure.zsh"
+PROMPT_SETUP_DST="$PROMPT_THEME/prompt_pure_setup"
+PROMPT_ASYNC_SRC="$PROMPT_THEME/async.zsh"
+PROMPT_ASYNC_DST="$PROMPT_THEME/async"
 
-# User configuration
+if [ -d $PROMPT_THEME ]; then
+  if [ ! -f $PROMPT_SETUP_DST ]; then
+    cp -v "$PROMPT_SETUP_SRC" "$PROMPT_SETUP_DST"
+  fi
+  if [ ! -f $PROMPT_ASYNC_DST ]; then
+    cp -v "$PROMPT_ASYNC_SRC" "$PROMPT_ASYNC_DST"
+  fi
+
+  fpath+=("$PROMPT_THEME")
+  autoload -U promptinit && promptinit
+  prompt pure
+fi
+
+# User Configuration
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 export EDITOR="nvim"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
@@ -37,15 +46,18 @@ export PYENV_ROOT="$HOME/.pyenv"
 . $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ -d ~/.config/zsh ]]; then
-  for file in ~/.config/zsh/*; do
-    source $file
-  done
-fi
-
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 fi
 
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' 
+USER_ZSH_CONFIG="$HOME/.config/zsh"
+USER_ZSH_PLUGIN="$USER_ZSH_CONFIG/plugins"
+if [[ -d $USER_ZSH_CONFIG ]]; then
+  for file in $USER_ZSH_CONFIG/*; do
+    source $file
+  done
+
+  source $USER_ZSH_PLUGIN/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $USER_ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
