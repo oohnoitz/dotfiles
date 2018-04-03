@@ -45,6 +45,7 @@ let g:table_mode_header_fillchar='='
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_fenced_languages = ['javascript=javascript']
 
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
@@ -124,7 +125,7 @@ set nobackup
 set noswapfile
 set undofile
 set undodir=~/.nvim/undo
-set listchars=eol:$,nbsp:_,tab:>-,trail:~,extends:>,precedes:<,space:.
+set listchars=eol:$,nbsp:_,tab:>-,trail:~,extends:>,precedes:<,space:·
 set list
 
 " Theme
