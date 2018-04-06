@@ -118,6 +118,7 @@ set foldlevel=99
 set nowrap
 set noshowmode
 set colorcolumn=80,120
+set cursorline
 
 " Editor Configs
 set completeopt-=preview
