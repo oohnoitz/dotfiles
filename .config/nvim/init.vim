@@ -51,6 +51,9 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
 
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 exec 'set runtimepath^='.g:dein_dir
 
 call dein#begin(expand('~/.cache/dein'))
@@ -89,6 +92,7 @@ call dein#add('godlygeek/tabular')
 call dein#add('plasticboy/vim-markdown')
 call dein#add('reedes/vim-pencil')
 call dein#add('dhruvasagar/vim-table-mode')
+call dein#add('itchyny/calendar.vim')
 
 call dein#end()
 
