@@ -176,6 +176,7 @@ nnoremap <Leader>L :nohlsearch<CR><C-l>
 
 "  Save
 map <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>
 
 "  Tab Completion
 inoremap <expr><tab> pumvisible() ? '<C-n>' : '<Tab>'
