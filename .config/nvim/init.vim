@@ -174,6 +174,9 @@ set smartcase
 map <F5> :redraw! \| :nohlsearch \| <CR><c-w>=
 nnoremap <Leader>L :nohlsearch<CR><C-l>
 
+"  Save
+map <C-s> :w<CR>
+
 "  Tab Completion
 inoremap <expr><tab> pumvisible() ? '<C-n>' : '<Tab>'
 
