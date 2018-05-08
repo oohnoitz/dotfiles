@@ -93,6 +93,7 @@ call dein#add('plasticboy/vim-markdown')
 call dein#add('reedes/vim-pencil')
 call dein#add('dhruvasagar/vim-table-mode')
 call dein#add('itchyny/calendar.vim')
+call dein#add('wakatime/vim-wakatime')
 
 call dein#end()
 
