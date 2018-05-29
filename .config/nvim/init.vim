@@ -2,6 +2,20 @@ let g:mapleader = ' '
 let g:maplocalleader = '\'
 
 " dein.vim plugin manager
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_splits = 1
+
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'javascript.jsx': ['eslint']
+\ }
+
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
 
 let g:dein_git = 'https://github.com/Shougo/dein.vim.git'
 let g:dein_dir = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
@@ -13,21 +27,7 @@ let g:deoplete#sources#ternjs#filter = 0
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
 
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'
-
-let g:echodoc#enable_at_startup = 1
-
 let g:gitgutter_diff_args = '-w'
-
-let g:ale_fixers = {
-\  'javascript': ['eslint'],
-\}
-
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
 
 let g:fzf_colors = {
 \   'bg+':     ['bg', 'Normal'],
@@ -43,16 +43,14 @@ let g:fzf_colors = {
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
 
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = '0'
+
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['javascript=javascript']
-
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_splits = 1
-
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
 
 exec 'set runtimepath^='.g:dein_dir
 
