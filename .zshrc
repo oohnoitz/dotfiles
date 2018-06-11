@@ -12,20 +12,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Theme Prompt
-PROMPT_THEME="$HOME/.config/zsh/themes/pure"
-PROMPT_SETUP_SRC="$PROMPT_THEME/pure.zsh"
-PROMPT_SETUP_DST="$PROMPT_THEME/prompt_pure_setup"
-PROMPT_ASYNC_SRC="$PROMPT_THEME/async.zsh"
-PROMPT_ASYNC_DST="$PROMPT_THEME/async"
-
+PROMPT_THEME="$HOME/.config/zsh/themes"
 if [ -d $PROMPT_THEME ]; then
-  if [ ! -f $PROMPT_SETUP_DST ]; then
-    cp -v "$PROMPT_SETUP_SRC" "$PROMPT_SETUP_DST"
-  fi
-  if [ ! -f $PROMPT_ASYNC_DST ]; then
-    cp -v "$PROMPT_ASYNC_SRC" "$PROMPT_ASYNC_DST"
-  fi
-
   fpath+=("$PROMPT_THEME")
   autoload -U promptinit && promptinit
   prompt pure
