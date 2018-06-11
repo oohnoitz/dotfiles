@@ -2,6 +2,70 @@ let g:mapleader = ' '
 let g:maplocalleader = '\'
 
 " dein.vim plugin manager
+let g:dein_git = 'https://github.com/Shougo/dein.vim.git'
+let g:dein_dir = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
+exec 'set runtimepath^='.g:dein_dir
+call dein#begin(expand('~/.cache/dein'))
+call dein#add(expand(g:dein_dir))
+
+" utility
+call dein#add('easymotion/vim-easymotion')
+call dein#add('jiangmiao/auto-pairs')
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+call dein#add('junegunn/fzf', { 'build': './install -all', 'merge': 0 })
+call dein#add('itchyny/calendar.vim')
+call dein#add('majutsushi/tagbar')
+call dein#add('moll/vim-bbye')
+call dein#add('scrooloose/nerdtree', { 'on_cmd': 'NERDTreeToggle' })
+call dein#add('simnalamburt/vim-mundo')
+call dein#add('tpope/vim-commentary')
+call dein#add('tpope/vim-repeat')
+call dein#add('tpope/vim-surround')
+call dein#add('vim-scripts/Rename')
+call dein#add('wakatime/vim-wakatime')
+
+" generic programming support
+call dein#add('editorconfig/editorconfig-vim')
+call dein#add('sheerun/vim-polyglot')
+call dein#add('Shougo/deoplete.nvim')
+call dein#add('Shougo/echodoc.vim')
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+call dein#add('w0rp/ale')
+
+" markdown/writing
+call dein#add('dhruvasagar/vim-table-mode')
+call dein#add('godlygeek/tabular')
+call dein#add('plasticboy/vim-markdown')
+call dein#add('reedes/vim-pencil')
+
+" git
+call dein#add('airblade/vim-gitgutter')
+call dein#add('tpope/vim-fugitive')
+
+" javascript
+call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
+call dein#add('mhartington/nvim-typescript', { 'build': 'npm install -g typescript' })
+
+" elixir
+call dein#add('avdgaag/vim-phoenix')
+call dein#add('mmorearty/elixir-ctags')
+call dein#add('slashmili/alchemist.vim')
+
+" go
+call dein#add('zchee/deoplete-go', { 'build': 'make' })
+
+" theme/interface
+call dein#add('mhartington/oceanic-next')
+call dein#add('ryanoasis/vim-devicons')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+call dein#end()
+
+if dein#check_install()
+  call dein#install()
+endif
+
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
@@ -16,9 +80,6 @@ let g:ale_sign_warning = '⚠'
 
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-
-let g:dein_git = 'https://github.com/Shougo/dein.vim.git'
-let g:dein_dir = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
 
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#ternjs#docs = 1
@@ -40,6 +101,14 @@ let g:fzf_colors = {
 \   'marker':  ['fg', 'MatchParen']
 \ }
 
+let g:LanguageClient_serverCommands = {
+\   'javascript': ['javascript-typescript-stdio'],
+\   'javascript.jsx': ['javascript-typescript-stdio'],
+\   'typescript': ['javascript-typescript-stdio']
+\ }
+
+let g:nvim_typescript#signature_complete = 1
+
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
 
@@ -51,53 +120,6 @@ let g:tern_show_signature_in_pum = '0'
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_fenced_languages = ['javascript=javascript']
-
-exec 'set runtimepath^='.g:dein_dir
-
-call dein#begin(expand('~/.cache/dein'))
-
-call dein#add(expand(g:dein_dir))
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/echodoc.vim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
-call dein#add('junegunn/fzf', { 'build': './install -all', 'merge': 0 })
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-call dein#add('scrooloose/nerdtree', { 'on_cmd': 'NERDTreeToggle' })
-call dein#add('sheerun/vim-polyglot')
-call dein#add('w0rp/ale')
-call dein#add('simnalamburt/vim-mundo')
-call dein#add('vim-scripts/Rename')
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('mhartington/nvim-typescript', { 'build': 'npm install -g typescript' })
-call dein#add('slashmili/alchemist.vim')
-call dein#add('zchee/deoplete-go', { 'build': 'make' })
-call dein#add('airblade/vim-gitgutter')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tpope/vim-repeat')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-commentary')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#add('mhartington/oceanic-next')
-call dein#add('ryanoasis/vim-devicons')
-call dein#add('easymotion/vim-easymotion')
-call dein#add('majutsushi/tagbar')
-call dein#add('moll/vim-bbye')
-call dein#add('jiangmiao/auto-pairs')
-call dein#add('godlygeek/tabular')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('reedes/vim-pencil')
-call dein#add('dhruvasagar/vim-table-mode')
-call dein#add('itchyny/calendar.vim')
-call dein#add('wakatime/vim-wakatime')
-
-call dein#end()
-
-if dein#check_install()
-  call dein#install()
-endif
 
 " Defaults
 let g:python_host_prog = expand('~/.pyenv/versions/neovim2/bin/python')
@@ -140,6 +162,7 @@ set termguicolors
 let g:airline_theme = 'base16_oceanicnext'
 let g:airline_powerline_fonts = 1
 let g:airline_section_x = '%{PencilMode()}'
+let g:airline_section_z = airline#section#create(['windowswap', 'linenr', 'maxlinenr', ' :%3v'])
 let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
