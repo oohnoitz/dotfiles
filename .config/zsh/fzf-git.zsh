@@ -13,9 +13,8 @@ gf() {
 }
 
 gh() {
-  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
-  fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-    --header 'Press CTRL-S to toggle sort' \
+  git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --branches --graph --color=always |
+  fzf-down --ansi --no-sort --reverse --multi \
     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
   grep -o "[a-f0-9]\{7,\}"
 }
