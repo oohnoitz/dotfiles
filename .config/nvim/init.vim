@@ -155,7 +155,7 @@ set nobackup
 set noswapfile
 set undofile
 set undodir=~/.nvim/undo
-set listchars=eol:$,nbsp:_,tab:>-,trail:~,extends:>,precedes:<,space:·
+set listchars=eol:↲,nbsp:␣,tab:▸\ ,trail:·,precedes:←,extends:→
 set list
 
 " Theme
