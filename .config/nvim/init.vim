@@ -66,12 +66,9 @@ if dein#check_install()
   call dein#install()
 endif
 
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
+let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
-let g:airline#extensions = []
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x']]
 
 let g:ale_fixers = {
