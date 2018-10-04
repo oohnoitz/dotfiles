@@ -13,9 +13,6 @@
 [submodule ".config/zsh/themes/pure"]
 	path = .config/zsh/themes/pure
 	url = https://github.com/sindresorhus/pure.git
-[submodule ".config/zsh/plugins/zsh-autosuggestions"]
-	path = .config/zsh/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
 [submodule ".config/zsh/plugins/zsh-syntax-highlighting"]
 	path = .config/zsh/plugins/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
