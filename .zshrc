@@ -46,6 +46,5 @@ if [[ -d $USER_ZSH_CONFIG ]]; then
     source $file
   done
 
-  source $USER_ZSH_PLUGIN/zsh-autosuggestions/zsh-autosuggestions.zsh
   source $USER_ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
