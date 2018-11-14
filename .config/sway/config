@@ -14,10 +14,12 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term env WAYLAND_DISPLAY=  alacritty
+set $term env WAYLAND_DISPLAY=  WINIT_HIDPI_FACTOR=1 alacritty
+# set $term alacritty
 # Your preferred application launcher
+set $file env WAYLAND_DISPLAY=  WINIT_HIDPI_FACTOR=1 alacritty -e ranger
+# set $file alacritty -e ranger
 set $menu rofi -show run -theme rofi
-set $file env WAYLAND_DISPLAY=  alacritty -e ranger
 set $lockscreen ~/.local/bin/lock-screen
 
 bindsym $mod+m exec $lockscreen
@@ -93,6 +95,7 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
 #
     # start a terminal
     bindsym $mod+Return exec $term
+    bindsym $mod+Control+Return exec alacritty
 
     # kill focused window
     bindsym $mod+Shift+q kill
