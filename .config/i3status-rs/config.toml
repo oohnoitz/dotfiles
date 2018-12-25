@@ -1,5 +1,13 @@
-theme = "solarized-dark"
-icons = "awesome"
+[theme]
+name = "solarized-dark"
+
+[icons]
+name = "awesome"
+
+[[block]]
+block = "music"
+player = "mopidy"
+max_width = 100
 
 [[block]]
 block = "disk_space"
@@ -11,18 +19,9 @@ warning = 20.0
 alert = 10.0
 
 [[block]]
-block = "net"
-device = "enp5s0"
-interval = 5
-
-[[block]]
 block = "load"
 interval = 5
 format = "{1m} {5m}"
-
-[[block]]
-block = "cpu"
-interval = 5
 
 [[block]]
 block = "memory"
@@ -33,4 +32,11 @@ format_swap = "{SUp}%"
 [[block]]
 block = "time"
 interval = 5
-format = "%a %d/%m %R"
+format = "%m.%d %R"
+
+[[block]]
+block = "time"
+interval = 5
+timezone = "UTC"
+format = "%m.%d %R"
+
