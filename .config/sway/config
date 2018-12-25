@@ -243,6 +243,7 @@ bindsym $mod+r mode "resize"
 bar {
     position top
     status_command i3status-rs ~/.config/i3status-rs/config.toml
+    font "Fura Code Nerd Font"
     colors {
         statusline #ffffff
         background #00000000
