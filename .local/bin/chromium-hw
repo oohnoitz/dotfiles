@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+allow_rgb10_configs=false chromium
