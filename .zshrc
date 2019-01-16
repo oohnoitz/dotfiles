@@ -14,6 +14,7 @@ source $ZSH/oh-my-zsh.sh
 # Theme Prompt
 PROMPT_THEME="$HOME/.config/zsh/themes"
 if [ -d $PROMPT_THEME ]; then
+  PURE_GIT_PULL=0
   fpath+=("$PROMPT_THEME")
   autoload -U promptinit && promptinit
   prompt pure
