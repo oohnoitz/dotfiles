@@ -122,7 +122,7 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
     bindsym XF86AudioNext exec mpc next
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioPlay exec mpc toggle
-    bindsym Print exec slurp | grim -g - $(xdg-user-dir SCREENSHOTS)/$(date +'%Y%m%d_%H%M%S.png')
+    bindsym Print exec ~/.local/bin/screenshot
 
 # Moving around:
 #

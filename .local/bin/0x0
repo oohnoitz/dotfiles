@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+FILEPATH=$@
+RESPONSE=$(curl --silent -H "Authorization: ${API_KEY_0X0}" -F "file=@${FILEPATH}" https://0x0.pt/api/v1/upload)
+FILENAME=$(echo $RESPONSE | jq -r .filename)
+FILELINK=$(echo $RESPONSE | jq -r .url)
+
+notify-send -t 5000 -a "0x0" "File Upload" "File: ${FILENAME}\nLink: ${FILELINK}"
+wl-copy ${FILELINK}

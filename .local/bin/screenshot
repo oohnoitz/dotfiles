@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+FILEPATH=$(xdg-user-dir SCREENSHOTS)/$(date +'%Y%m%d_%H%M%S.png')
+slurp | grim -g - ${FILEPATH}
+
+0x0 ${FILEPATH}
