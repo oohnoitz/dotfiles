@@ -11,6 +11,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+zle -N edit-command-line
+bindkey -v
+bindkey -M vicmd v edit-command-line
+
 # Theme Prompt
 PROMPT_THEME="$HOME/.config/zsh/themes"
 if [ -d $PROMPT_THEME ]; then
