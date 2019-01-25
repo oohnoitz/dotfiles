@@ -31,10 +31,6 @@ hide_edge_borders both
 
 font Knack Nerd Font 11
 
-output DP-1 pos    0,0 res 3840x2160 scale 1
-output DP-2 pos 3840,0 res 3840x2160 scale 1
-output DP-3 pos 7680,0 res 3840x2160 scale 1
-
 ### Decoration
 #
 set $black    #080808
@@ -56,23 +52,20 @@ set $white    #EEEEEC
 
 # Color                   border    background text    indicator  child_border
   client.focused          $lmagenta $black     $gray   $lmagenta  $lmagenta
-  client.focused_inactive $gray     $black     $gray   $gray      $gray
-  client.unfocused        $black    $black     $gray   $black     $magenta
-  client.urgent           $lgreen   $black     $gray   $lgreen    $lmagenta
+  client.focused_inactive $black    $black     $gray   $black     $black
+  client.unfocused        $black    $black     $gray   $black     $black
+  client.urgent           $lgreen   $black     $gray   $lgreen    $lgreen
 
 ### Output configuration
 #
+output DP-1 pos    0,0 res 3840x2160 scale 1
+output DP-2 pos 3840,0 res 3840x2160 scale 1
+output DP-3 pos 7680,0 res 3840x2160 scale 1
+
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output DP-1 bg ~/Downloads/DP-0.jpg fill
 output DP-2 bg ~/Downloads/DP-1.jpg fill
 output DP-3 bg ~/Downloads/DP-2.jpg fill
-
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Input configuration
 #
@@ -123,7 +116,7 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioPlay exec mpc toggle
     bindsym Print exec ~/.local/bin/screenshot
-
+#
 # Moving around:
 #
     # Move your focus around
