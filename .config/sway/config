@@ -20,6 +20,7 @@ set $file alacritty -e ranger
 # set $file alacritty -e ranger
 set $menu rofi -show run -theme rofi
 set $lockscreen ~/.local/bin/lock-screen
+set $screenshot ~/.local/bin/screenshot
 
 bindsym $mod+m exec $lockscreen
 
@@ -115,7 +116,7 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
     bindsym XF86AudioNext exec mpc next
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioPlay exec mpc toggle
-    bindsym Print exec ~/.local/bin/screenshot
+    bindsym Print exec $screenshot
 #
 # Moving around:
 #
@@ -207,6 +208,7 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
 #
 # Resizing containers:
 #
+bindsym $mod+r mode "resize"
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
@@ -227,7 +229,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
 
 #
 # Status Bar:
