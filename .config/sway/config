@@ -81,6 +81,12 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
+input "1133:16495:Logitech_MX_Ergo" {
+  natural_scroll disabled
+  middle_emulation enabled
+  scroll_factor 5
+  pointer_accel 0.75
+}
 
 ### Key bindings
 #
