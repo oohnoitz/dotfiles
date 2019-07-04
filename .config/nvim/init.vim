@@ -42,6 +42,7 @@ call dein#add('reedes/vim-pencil')
 " git
 call dein#add('airblade/vim-gitgutter')
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-rhubarb')
 
 " javascript
 call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
@@ -49,6 +50,8 @@ call dein#add('mhartington/nvim-typescript', { 'build': 'npm install -g typescri
 
 " elixir
 call dein#add('avdgaag/vim-phoenix')
+call dein#add('elixir-editors/vim-elixir')
+call dein#add('mattreduce/vim-mix')
 call dein#add('mmorearty/elixir-ctags')
 call dein#add('slashmili/alchemist.vim')
 
@@ -88,6 +91,9 @@ let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#filter = 0
 let g:deoplete#sources#ternjs#types = 1
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
+let g:deoplete#sources#go#gocode_binary = 'gocode'
+let g:deoplete#sources#go#builtin_objects = 1
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 
 let g:gitgutter_diff_args = '-w'
 
