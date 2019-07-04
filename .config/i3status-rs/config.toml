@@ -7,7 +7,6 @@ name = "awesome"
 [[block]]
 block = "music"
 player = "mopidy"
-max_width = 100
 
 [[block]]
 block = "disk_space"
@@ -35,8 +34,7 @@ interval = 5
 format = "%m.%d %R"
 
 [[block]]
-block = "time"
-interval = 5
-timezone = "UTC"
-format = "%m.%d %R"
+block = "custom"
+command = "mouse-battery-read"
+interval = 100
 
