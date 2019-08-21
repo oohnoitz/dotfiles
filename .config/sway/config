@@ -62,6 +62,7 @@ set $white    #EEEEEC
 output DP-1 pos    0,0 res 3840x2160 scale 1
 output DP-2 pos 3840,0 res 3840x2160 scale 1
 output DP-3 pos 7680,0 res 3840x2160 scale 1
+# output DP-3 pos 7680,0 res 3840x2160 scale 1.5
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output DP-1 bg ~/Downloads/DP-0.jpg fill
