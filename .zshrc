@@ -50,6 +50,4 @@ if [[ -d $USER_ZSH_CONFIG ]]; then
   for file in $USER_ZSH_CONFIG/*; do
     source $file
   done
-
-  source $USER_ZSH_PLUGIN/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
