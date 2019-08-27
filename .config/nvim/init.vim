@@ -1,79 +1,69 @@
 let g:mapleader = ' '
 let g:maplocalleader = '\'
 
-" dein.vim plugin manager
-let g:dein_git = 'https://github.com/Shougo/dein.vim.git'
-let g:dein_dir = '~/.cache/dein/repos/github.com/Shougo/dein.vim'
-exec 'set runtimepath^='.g:dein_dir
-call dein#begin(expand('~/.cache/dein'))
-call dein#add(expand(g:dein_dir))
+function! PackInit() abort
+  packadd minpac
 
-" utility
-call dein#add('easymotion/vim-easymotion')
-call dein#add('jiangmiao/auto-pairs')
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
-call dein#add('junegunn/fzf', { 'build': './install -all', 'merge': 0 })
-call dein#add('itchyny/calendar.vim')
-call dein#add('majutsushi/tagbar')
-call dein#add('moll/vim-bbye')
-call dein#add('scrooloose/nerdtree', { 'on_cmd': 'NERDTreeToggle' })
-call dein#add('simnalamburt/vim-mundo')
-call dein#add('tpope/vim-commentary')
-call dein#add('tpope/vim-repeat')
-call dein#add('tpope/vim-surround')
-call dein#add('vim-scripts/Rename')
-call dein#add('wakatime/vim-wakatime')
+  call minpac#init()
+  call minpac#add('k-takata/minpac', {'type': 'opt'})
 
-" generic programming support
-call dein#add('editorconfig/editorconfig-vim')
-call dein#add('sheerun/vim-polyglot')
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('Shougo/echodoc.vim')
-call dein#add('Shougo/neosnippet.vim')
-call dein#add('Shougo/neosnippet-snippets')
-call dein#add('w0rp/ale')
+  " theme/interface
+  call minpac#add('mhartington/oceanic-next')
+  call minpac#add('ryanoasis/vim-devicons')
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
 
-" markdown/writing
-call dein#add('dhruvasagar/vim-table-mode')
-call dein#add('godlygeek/tabular')
-call dein#add('plasticboy/vim-markdown')
-call dein#add('reedes/vim-pencil')
+  " utility
+  call minpac#add('easymotion/vim-easymotion')
+  call minpac#add('janko/vim-test')
+  call minpac#add('jiangmiao/auto-pairs')
+  call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'})
+  call minpac#add('junegunn/fzf.vim')
+  call minpac#add('majutsushi/tagbar')
+  call minpac#add('moll/vim-bbye')
+  call minpac#add('scrooloose/nerdtree')
+  call minpac#add('simnalamburt/vim-mundo')
+  call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-repeat')
+  call minpac#add('tpope/vim-surround')
+  call minpac#add('vim-scripts/Rename')
+  call minpac#add('wakatime/vim-wakatime')
 
-" git
-call dein#add('airblade/vim-gitgutter')
-call dein#add('tpope/vim-fugitive')
-call dein#add('tpope/vim-rhubarb')
+  " generic programming support
+  call minpac#add('dense-analysis/ale')
+  call minpac#add('editorconfig/editorconfig-vim')
+  call minpac#add('sheerun/vim-polyglot')
+  call minpac#add('Shougo/deoplete.nvim')
+  call minpac#add('Shougo/echodoc.vim')
 
-" javascript
-call dein#add('carlitux/deoplete-ternjs', { 'build': 'npm install -g tern' })
-call dein#add('mhartington/nvim-typescript', { 'build': 'npm install -g typescript' })
+  " markdown/writing
+  call minpac#add('dhruvasagar/vim-table-mode')
+  call minpac#add('godlygeek/tabular')
+  call minpac#add('plasticboy/vim-markdown')
+  call minpac#add('reedes/vim-pencil')
 
-" elixir
-call dein#add('avdgaag/vim-phoenix')
-call dein#add('elixir-editors/vim-elixir')
-call dein#add('mattreduce/vim-mix')
-call dein#add('mmorearty/elixir-ctags')
-call dein#add('slashmili/alchemist.vim')
+  " git
+  call minpac#add('airblade/vim-gitgutter')
+  call minpac#add('tpope/vim-fugitive')
+  call minpac#add('tpope/vim-rhubarb')
 
-" go
-call dein#add('zchee/deoplete-go', { 'build': 'make' })
+  " elixir
+  call minpac#add('avdgaag/vim-phoenix')
+  call minpac#add('elixir-editors/vim-elixir')
+  call minpac#add('mmorearty/elixir-ctags')
+  call minpac#add('slashmili/alchemist.vim')
 
-" theme/interface
-call dein#add('mhartington/oceanic-next')
-call dein#add('ryanoasis/vim-devicons')
-call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
-call dein#end()
-
-if dein#check_install()
-  call dein#install()
-endif
+  " javascript
+  call minpac#add('HerringtonDarkholme/yats.vim')
+  call minpac#add('mhartington/nvim-typescript', {'do': './install.sh'})
+endfunction
 
 let g:airline_extensions = ['tabline']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x']]
 
+let g:ale_elixir_elixir_ls_release = '~/.lsp/elixir-ls/rel'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint']
@@ -82,19 +72,7 @@ let g:ale_fixers = {
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#ternjs#docs = 1
-let g:deoplete#sources#ternjs#depths = 1
-let g:deoplete#sources#ternjs#filter = 0
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#filetypes = ['jsx', 'vue']
-let g:deoplete#sources#go#gocode_binary = 'gocode'
-let g:deoplete#sources#go#builtin_objects = 1
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-
 let g:gitgutter_diff_args = '-w'
 
 let g:fzf_colors = {
@@ -167,8 +145,11 @@ set number relativenumber
 set termguicolors
 let g:airline_theme = 'base16_oceanicnext'
 let g:airline_powerline_fonts = 1
-let g:airline_section_x = '%{PencilMode()}'
-let g:airline_section_z = airline#section#create(['windowswap', 'linenr', 'maxlinenr'])
+function! AirlineInit()
+  let g:airline_section_x = '%{PencilMode()}'
+  let g:airline_section_z = airline#section#create(['windowswap', 'linenr', 'maxlinenr'])
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 let g:airline_mode_map = {
 \   '__' : '-',
 \   'n'  : 'N',
@@ -220,6 +201,8 @@ nnoremap <Leader>L :nohlsearch<CR><C-l>
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
 
+nnoremap ; :
+
 "  Tab Completion
 inoremap <expr><tab> pumvisible() ? '<C-n>' : '<Tab>'
 
@@ -238,6 +221,18 @@ nnoremap tk :tabnext<CR>
 nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+
+vnoremap <leader>Y "+y
+nnoremap <leader>Y "+y
+nnoremap <leader>P "+p
+vnoremap <leader>P "+p
 
 " EasyMotion: ALE: Lint Navigation
 nmap <A-k> <Plug>(ale_previous_wrap)
@@ -278,10 +273,10 @@ nnoremap <leader>grm :Git rm %:p<CR><CR>
 " Windows
 nnoremap <C-w>_ <C-W>v<C-W><Right>
 nnoremap <C-w>- <C-W>s<C-W><Down>
-nnoremap <C-j> <C-w>+
-nnoremap <C-k> <C-w>-
-nnoremap <C-h> <C-w><
-nnoremap <C-l> <C-w>> 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 "  Diff
 nnoremap <Leader>w :w !diff -u % -<CR>
@@ -303,3 +298,8 @@ nnoremap <silent> [fzf]f :Rg<CR>
 nnoremap <silent> [fzf]t :Tags<CR>
 nnoremap <silent> [fzf]g :GFiles<CR>
 nnoremap <silent> [fzf]s :GFiles?<CR>
+
+"  minpac
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()

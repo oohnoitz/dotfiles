@@ -16,3 +16,9 @@
 [submodule ".fpp"]
 	path = .fpp
 	url = https://github.com/facebook/PathPicker.git
+[submodule ".config/nvim/pack/minpac/opt/minpac"]
+	path = .config/nvim/pack/minpac/opt/minpac
+	url = https://github.com/k-takata/minpac.git
+[submodule ".lsp/elixir-ls"]
+	path = .lsp/elixir-ls
+	url = git@github.com:elixir-lsp/elixir-ls.git
