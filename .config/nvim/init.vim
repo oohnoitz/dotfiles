@@ -63,10 +63,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x']]
 
-let g:ale_elixir_elixir_ls_release = '~/.lsp/elixir-ls/rel'
+let g:ale_elixir_elixir_ls_release = $HOME . '/.lsp/elixir-ls/release'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint']
+\ }
+let g:ale_linters = {
+\   'elixir': ['credo', 'elixir-ls']
 \ }
 
 let g:ale_sign_error = '✖'
@@ -237,7 +240,10 @@ vnoremap <leader>P "+p
 " EasyMotion: ALE: Lint Navigation
 nmap <A-k> <Plug>(ale_previous_wrap)
 nmap <A-j> <Plug>(ale_next_wrap)
-nmap <Leader>d <Plug>(ale_fix)
+nmap <Leader>ad <Plug>(ale_go_to_definition)
+nmap <Leader>ah <Plug>(ale_hover)
+nmap <Leader>af <Plug>(ale_fix)
+nmap <Leader>ar <Plug>(ale_find_references)
 
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
