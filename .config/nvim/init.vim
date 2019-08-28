@@ -24,14 +24,15 @@ function! PackInit() abort
   call minpac#add('scrooloose/nerdtree')
   call minpac#add('simnalamburt/vim-mundo')
   call minpac#add('tpope/vim-commentary')
+  call minpac#add('tpope/vim-eunuch')
   call minpac#add('tpope/vim-repeat')
   call minpac#add('tpope/vim-surround')
-  call minpac#add('vim-scripts/Rename')
   call minpac#add('wakatime/vim-wakatime')
 
   " generic programming support
   call minpac#add('dense-analysis/ale')
   call minpac#add('editorconfig/editorconfig-vim')
+  call minpac#add('kana/vim-textobj-user')
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('Shougo/deoplete.nvim')
   call minpac#add('Shougo/echodoc.vim')
@@ -48,12 +49,13 @@ function! PackInit() abort
   call minpac#add('tpope/vim-rhubarb')
 
   " elixir
+  call minpac#add('andyl/vim-textobj-elixir')
   call minpac#add('avdgaag/vim-phoenix')
   call minpac#add('elixir-editors/vim-elixir')
   call minpac#add('mmorearty/elixir-ctags')
   call minpac#add('slashmili/alchemist.vim')
 
-  " javascript
+  " javascript/typescript
   call minpac#add('HerringtonDarkholme/yats.vim')
   call minpac#add('mhartington/nvim-typescript', {'do': './install.sh'})
 endfunction
@@ -89,21 +91,10 @@ let g:fzf_colors = {
 \   'marker':  ['fg', 'MatchParen']
 \ }
 
-let g:LanguageClient_serverCommands = {
-\   'javascript': ['javascript-typescript-stdio'],
-\   'javascript.jsx': ['javascript-typescript-stdio'],
-\   'typescript': ['javascript-typescript-stdio']
-\ }
-
 let g:nvim_typescript#signature_complete = 1
 
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
-
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
-let g:tern_request_timeout = 1
-let g:tern_show_signature_in_pum = '0'
 
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_folding_disabled = 1
@@ -204,6 +195,7 @@ nnoremap <Leader>L :nohlsearch<CR><C-l>
 map <C-s> :w<CR>
 imap <C-s> <Esc>:w<CR>
 
+"  Map ; to :
 nnoremap ; :
 
 "  Tab Completion
@@ -225,19 +217,13 @@ nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-
+"  Clipboard
 vnoremap <leader>Y "+y
 nnoremap <leader>Y "+y
 nnoremap <leader>P "+p
 vnoremap <leader>P "+p
 
-" EasyMotion: ALE: Lint Navigation
+"  ALE
 nmap <A-k> <Plug>(ale_previous_wrap)
 nmap <A-j> <Plug>(ale_next_wrap)
 nmap <Leader>ad <Plug>(ale_go_to_definition)
