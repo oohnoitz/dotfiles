@@ -17,7 +17,7 @@ function! PackInit() abort
   call minpac#add('easymotion/vim-easymotion')
   call minpac#add('janko/vim-test')
   call minpac#add('jiangmiao/auto-pairs')
-  call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'})
+  call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'})
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('majutsushi/tagbar')
   call minpac#add('moll/vim-bbye')
@@ -138,7 +138,6 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 set number relativenumber
 set termguicolors
 let g:airline_theme = 'base16_oceanicnext'
-let g:airline_powerline_fonts = 1
 function! AirlineInit()
   let g:airline_section_x = '%{PencilMode()}'
   let g:airline_section_z = airline#section#create(['windowswap', 'linenr', 'maxlinenr'])
