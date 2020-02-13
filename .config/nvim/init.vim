@@ -33,6 +33,7 @@ function! PackInit() abort
   call minpac#add('dense-analysis/ale')
   call minpac#add('editorconfig/editorconfig-vim')
   call minpac#add('kana/vim-textobj-user')
+  call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
   call minpac#add('sheerun/vim-polyglot')
   call minpac#add('Shougo/deoplete.nvim')
   call minpac#add('Shougo/echodoc.vim')
@@ -53,11 +54,6 @@ function! PackInit() abort
   call minpac#add('avdgaag/vim-phoenix')
   call minpac#add('elixir-editors/vim-elixir')
   call minpac#add('mmorearty/elixir-ctags')
-  call minpac#add('slashmili/alchemist.vim')
-
-  " javascript/typescript
-  call minpac#add('HerringtonDarkholme/yats.vim')
-  call minpac#add('mhartington/nvim-typescript', {'do': './install.sh'})
 endfunction
 
 let g:airline_extensions = ['tabline']
@@ -65,13 +61,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x']]
 
-let g:ale_elixir_elixir_ls_release = $HOME . '/.lsp/elixir-ls/release'
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint']
-\ }
-let g:ale_linters = {
-\   'elixir': ['credo', 'elixir-ls']
 \ }
 
 let g:ale_sign_error = '✖'
