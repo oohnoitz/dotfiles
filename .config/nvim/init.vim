@@ -30,12 +30,10 @@ function! PackInit() abort
   call minpac#add('wakatime/vim-wakatime')
 
   " generic programming support
-  call minpac#add('dense-analysis/ale')
   call minpac#add('editorconfig/editorconfig-vim')
   call minpac#add('kana/vim-textobj-user')
   call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
   call minpac#add('sheerun/vim-polyglot')
-  call minpac#add('Shougo/deoplete.nvim')
   call minpac#add('Shougo/echodoc.vim')
 
   " markdown/writing
@@ -61,15 +59,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 1
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x']]
 
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'javascript.jsx': ['eslint']
-\ }
-
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 
-let g:deoplete#enable_at_startup = 1
 let g:gitgutter_diff_args = '-w'
 
 let g:fzf_colors = {
@@ -214,14 +206,6 @@ nnoremap <leader>Y "+y
 nnoremap <leader>P "+p
 vnoremap <leader>P "+p
 
-"  ALE
-nmap <A-k> <Plug>(ale_previous_wrap)
-nmap <A-j> <Plug>(ale_next_wrap)
-nmap <Leader>ad <Plug>(ale_go_to_definition)
-nmap <Leader>ah <Plug>(ale_hover)
-nmap <Leader>af <Plug>(ale_fix)
-nmap <Leader>ar <Plug>(ale_find_references)
-
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
@@ -281,6 +265,24 @@ nnoremap <silent> [fzf]f :Rg<CR>
 nnoremap <silent> [fzf]t :Tags<CR>
 nnoremap <silent> [fzf]g :GFiles<CR>
 nnoremap <silent> [fzf]s :GFiles?<CR>
+
+"  CoC
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 "  minpac
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
