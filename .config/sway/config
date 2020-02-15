@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 set $file alacritty -e ranger
 # set $file alacritty -e ranger
-set $menu rofi -show run -theme rofi
+set $menu wofi --show run
 set $lockscreen ~/.local/bin/lock-screen
 set $screenshot ~/.local/bin/screenshot
 
