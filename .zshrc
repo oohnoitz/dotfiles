@@ -1,19 +1,24 @@
 export TERM="xterm-256color"
 
-# Path to oh-my-zsh installation
-export ZSH=$HOME/.oh-my-zsh
-
-DISABLE_AUTO_TITLE="true"
-ZSH_THEME=""
-plugins=(
-  colored-man-pages
-)
-
-source $ZSH/oh-my-zsh.sh
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 
 zle -N edit-command-line
 bindkey -v
 bindkey -M vicmd v edit-command-line
+
+## History file configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
 
 # Theme Prompt
 PROMPT_THEME="$HOME/.config/zsh/themes"
