@@ -55,3 +55,6 @@
 
 [include]
 	path = ~/.config/git/config
+
+[pull]
+	rebase = false
