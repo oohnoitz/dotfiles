@@ -243,7 +243,7 @@ mode "resize" {
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    status_command i3status-rs ~/.config/i3status-rs/config.toml
+    swaybar_command waybar
     font "Fura Code Nerd Font"
     colors {
         statusline #ffffff
