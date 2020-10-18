@@ -18,4 +18,4 @@
 	url = https://github.com/k-takata/minpac.git
 [submodule ".lsp/elixir-ls"]
 	path = .lsp/elixir-ls
-	url = git@github.com:elixir-lsp/elixir-ls.git
+	url = https://github.com/elixir-lsp/elixir-ls.git
