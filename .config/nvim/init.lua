@@ -25,7 +25,6 @@ paq {'nvim-lua/popup.nvim'}
 paq {'nvim-lua/plenary.nvim'}
 
 paq {'mhartington/oceanic-next'}
-paq {'ryanoasis/vim-devicons'}
 paq {'hoob3rt/lualine.nvim'}
 
 paq {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']}
@@ -40,7 +39,7 @@ paq {'windwp/nvim-autopairs'}
 
 paq {'elixir-editors/vim-elixir'}
 
-paq {'tpope/vim-commentary'}
+paq {'b3nj5m1n/kommentary'}
 paq {'tpope/vim-eunuch'}
 paq {'tpope/vim-repeat'}
 paq {'blackCauldron7/surround.nvim'}
@@ -54,8 +53,16 @@ paq {'neovim/nvim-lspconfig'}
 paq {'hrsh7th/nvim-compe'}
 paq {'nvim-telescope/telescope.nvim'}
 
+paq {'kyazdani42/nvim-web-devicons'}
+paq {'kyazdani42/nvim-tree.lua'}
+
 g['python_host_prog'] = fn.expand('~/.pyenv/versions/neovim2/bin/python')
 g['python3_host_prog'] = fn.expand('~/.pyenv/versions/neovim3/bin/python')
+
+require('kommentary.config').use_extended_mappings()
+require('nvim-web-devicons').setup {
+  default = true;
+}
 
 local check_backspace = function()
   local col = fn.col('.') - 1
@@ -92,6 +99,7 @@ require('compe').setup {
   source = {
     path = true;
     nvim_lsp = true;
+    treesitter = true;
   };
 }
 
@@ -226,6 +234,9 @@ map('n', '<C-h>', '<C-w>h')
 map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
+
+map('n', '<space>e', ':NvimTreeToggle<CR>')
+map('n', '<space>E', ':NvimTreeFindFile<CR>')
 
 --- TAB NAVIGATION
 map('n', 'tn', ':tabnew<Space>')
