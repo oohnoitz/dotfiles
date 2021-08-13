@@ -17,43 +17,43 @@ local function map(mode, lhs, rhs, opts)
 end
 
 --- PLUGINS -------------------------------------------------
-cmd 'packadd paq-nvim'
-local paq = require('paq-nvim').paq
-paq {'savq/paq-nvim', opt = true}
+require('paq') {
+  'savq/paq-nvim';
 
-paq {'nvim-lua/popup.nvim'}
-paq {'nvim-lua/plenary.nvim'}
+  'nvim-lua/popup.nvim';
+  'nvim-lua/plenary.nvim';
 
-paq {'mhartington/oceanic-next'}
-paq {'hoob3rt/lualine.nvim'}
+  'mhartington/oceanic-next';
+  'hoob3rt/lualine.nvim';
 
-paq {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']}
-paq {'nvim-treesitter/playground'}
+   {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']};
+  'nvim-treesitter/playground';
 
-paq {'editorconfig/editorconfig-vim'}
-paq {'ojroques/nvim-bufdel'}
-paq {'phaazon/hop.nvim'}
-paq {'junegunn/fzf', run = fn['fzf#install']}
-paq {'junegunn/fzf.vim'}
-paq {'windwp/nvim-autopairs'}
+  'editorconfig/editorconfig-vim';
+  'ojroques/nvim-bufdel';
+  'phaazon/hop.nvim';
+  {'junegunn/fzf', run = fn['fzf#install']};
+  'junegunn/fzf.vim';
+  'windwp/nvim-autopairs';
 
-paq {'elixir-editors/vim-elixir'}
+  'elixir-editors/vim-elixir';
 
-paq {'b3nj5m1n/kommentary'}
-paq {'tpope/vim-eunuch'}
-paq {'tpope/vim-repeat'}
-paq {'blackCauldron7/surround.nvim'}
-paq {'kana/vim-textobj-user'}
+  'b3nj5m1n/kommentary';
+  'tpope/vim-eunuch';
+  'tpope/vim-repeat';
+  'blackCauldron7/surround.nvim';
+  'kana/vim-textobj-user';
 
-paq {'lewis6991/gitsigns.nvim'}
-paq {'tpope/vim-rhubarb'}
+  'lewis6991/gitsigns.nvim';
+  'tpope/vim-rhubarb';
 
-paq {'neovim/nvim-lspconfig'}
-paq {'hrsh7th/nvim-compe'}
-paq {'nvim-telescope/telescope.nvim'}
+  'neovim/nvim-lspconfig';
+  'hrsh7th/nvim-compe';
+  'nvim-telescope/telescope.nvim';
 
-paq {'kyazdani42/nvim-web-devicons'}
-paq {'kyazdani42/nvim-tree.lua'}
+  'kyazdani42/nvim-web-devicons';
+  'kyazdani42/nvim-tree.lua';
+}
 
 g['python_host_prog'] = fn.expand('~/.pyenv/versions/neovim2/bin/python')
 g['python3_host_prog'] = fn.expand('~/.pyenv/versions/neovim3/bin/python')
