@@ -46,7 +46,6 @@ paq {'blackCauldron7/surround.nvim'}
 paq {'kana/vim-textobj-user'}
 
 paq {'lewis6991/gitsigns.nvim'}
-paq {'tpope/vim-fugitive'}
 paq {'tpope/vim-rhubarb'}
 
 paq {'neovim/nvim-lspconfig'}
@@ -129,6 +128,8 @@ lsp.cssls.setup {}
 lsp.elixirls.setup {
   cmd = { vim.loop.os_homedir() .. '/.lsp/elixir-ls/release/language_server.sh' }
 }
+
+lsp.terraformls.setup {}
 
 lsp.tsserver.setup {}
 
