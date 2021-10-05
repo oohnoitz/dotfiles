@@ -232,6 +232,7 @@ opt('w', 'listchars', 'eol:¬,nbsp:␣,tab:▸ ,trail:·,precedes:←,extends:�
 opt('w', 'number', true)
 opt('w', 'relativenumber', true)
 opt('w', 'wrap', false)
+opt('o', 'inccommand', 'nosplit')
 
 g['oceanic_next_terminal_bold'] = 1
 g['oceanic_next_terminal_italic'] = 1
