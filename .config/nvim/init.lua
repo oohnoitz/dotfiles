@@ -33,7 +33,7 @@ if is_loaded('paq') then
     'nvim-lua/plenary.nvim';
 
     'mhartington/oceanic-next';
-    'hoob3rt/lualine.nvim';
+    'nvim-lualine/lualine.nvim';
 
      {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']};
     'nvim-treesitter/playground';
@@ -41,8 +41,6 @@ if is_loaded('paq') then
     'editorconfig/editorconfig-vim';
     'ojroques/nvim-bufdel';
     'ggandor/lightspeed.nvim';
-    {'junegunn/fzf', run = fn['fzf#install']};
-    'junegunn/fzf.vim';
     'windwp/nvim-autopairs';
 
     'elixir-editors/vim-elixir';
@@ -50,7 +48,6 @@ if is_loaded('paq') then
     'b3nj5m1n/kommentary';
     'tpope/vim-eunuch';
     'tpope/vim-repeat';
-    'blackCauldron7/surround.nvim';
     'kana/vim-textobj-user';
 
     'lewis6991/gitsigns.nvim';
@@ -61,12 +58,12 @@ if is_loaded('paq') then
     'hrsh7th/cmp-buffer';
     'hrsh7th/cmp-path';
     'hrsh7th/cmp-cmdline';
-    'hrsh7th/nvim-cmp';
-
     'hrsh7th/cmp-vsnip';
     'hrsh7th/vim-vsnip';
+    'hrsh7th/nvim-cmp';
 
     'nvim-telescope/telescope.nvim';
+    {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'};
 
     'kyazdani42/nvim-web-devicons';
     'kyazdani42/nvim-tree.lua';
@@ -114,6 +111,13 @@ end
 
 if is_loaded('gitsigns') then
   require('gitsigns').setup {}
+end
+
+if is_loaded('telescope') then
+  local telescope = require('telescope')
+
+  telescope.setup {}
+  telescope.load_extension('fzf')
 end
 
 local has_words_before = function()
@@ -288,10 +292,9 @@ map('n', 'tj', ':tabprev<CR>')
 map('n', 'th', ':tabfirst<CR>')
 map('n', 'tl', ':tablast<CR>')
 
-map('n', '<space>p', ':Files<CR>')
-map('n', '<space>g', ':grep<space>')
-map('n', '<space>b', ':Buffers<CR>')
-map('n', '<space>t', ':TagbarToggle<CR>')
+map('n', '<space>p', ':Telescope find_files<CR>')
+map('n', '<space>g', ':Telescope live_grep<CR>')
+map('n', '<space>b', ':Telescope buffers<CR>')
 map('n', '<space>q', ':BufDel<CR>')
 
 map('n', '<space>,', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
