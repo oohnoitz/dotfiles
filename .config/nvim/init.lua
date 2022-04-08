@@ -57,7 +57,15 @@ if is_loaded('paq') then
     'tpope/vim-rhubarb';
 
     'neovim/nvim-lspconfig';
-    'hrsh7th/nvim-compe';
+    'hrsh7th/cmp-nvim-lsp';
+    'hrsh7th/cmp-buffer';
+    'hrsh7th/cmp-path';
+    'hrsh7th/cmp-cmdline';
+    'hrsh7th/nvim-cmp';
+
+    'hrsh7th/cmp-vsnip';
+    'hrsh7th/vim-vsnip';
+
     'nvim-telescope/telescope.nvim';
 
     'kyazdani42/nvim-web-devicons';
@@ -104,61 +112,59 @@ if is_loaded('gitsigns') then
   require('gitsigns').setup {}
 end
 
+local has_words_before = function()
+  local line, col = unpack(api.nvim_win_get_cursor(0))
+  return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
-if is_loaded('compe') then
-  require('compe').setup {
-    enabled = true;
-    autocomplete = true;
-    debug = true;
-    min_length = 1;
-    preselect = 'enable';
-    throttle_time = 80;
-    source_timeout = 200;
-    incomplete_delay = 400;
-    max_abbr_width = 100;
-    max_kind_width = 100;
-    max_menu_width = 100;
-    documentation = true;
+if is_loaded('cmp') then
+  local cmp = require'cmp'
 
-    source = {
-      path = true;
-      nvim_lsp = true;
-      treesitter = true;
-    };
+  cmp.setup {
+    snippet = {
+      expand = function(args)
+        fn['vsnip#anonymous'](args.body)
+      end,
+    },
+    mapping = {
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, {'i', 's'}),
+      ['<S-Tab>'] = cmp.mapping(function()
+        if cmp.visible() then
+          cmp.select_prev_item()
+        end
+      end, {'i', 's'})
+    },
+    sources = cmp.config.sources({{ name = 'nvim_lsp' }, { name = 'buffer' }})
   }
-end
-
-_G.tab_complete = function()
-  if fn.pumvisible() == 1 then
-    return t("<C-n>")
-  elseif check_backspace() then
-    return t("<Tab>")
-  else
-    return fn['compe#complete']()
-  end
-end
-
-_G.s_tab_complete = function()
-  if fn.pumvisible() == 1 then
-    return t("<C-p>")
-  else
-    return t("<S-Tab>")
-  end
 end
 
 --- LSP -----------------------------------------------------
 if is_loaded('lspconfig') then
   local lsp = require('lspconfig')
+  local cap = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-  lsp.cssls.setup {}
-
-  lsp.elixirls.setup {
-    cmd = { vim.loop.os_homedir() .. '/.lsp/elixir-ls/release/language_server.sh' }
+  lsp.cssls.setup {
+    capabilities = cap
   }
 
-  lsp.terraformls.setup {}
+  lsp.elixirls.setup {
+    filetypes = { 'elixir', 'eelixir', 'heex' },
+    cmd = { vim.loop.os_homedir() .. '/.lsp/elixir-ls/release/language_server.sh' },
+    capabilities = cap
+  }
 
-  lsp.tsserver.setup {}
+  lsp.tsserver.setup {
+    capabilities = cap
+  }
 end
 
 --- LUALINE -------------------------------------------------
@@ -218,7 +224,7 @@ opt('b', 'shiftwidth', indent)
 opt('b', 'smartindent', true)
 opt('b', 'tabstop', indent)
 opt('o', 'autoread', true)
-opt('o', 'completeopt', 'menuone,noinsert,noselect')
+opt('o', 'completeopt', 'menu,menuone,noselect')
 opt('o', 'hidden', true)
 opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
@@ -252,10 +258,7 @@ map('n', '<space>L', ':nohlsearch<CR><C-l>')
 map('n', '<C-s>', ':w<CR>')
 map('i', '<C-s>', '<Esc>:w<CR>')
 map('n', ';', ':')
-map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('i', '<C-b>', '<Esc>bdwi')
 
 --- CLIPBOARD
 map('v', '<space>Y', '"+y')
