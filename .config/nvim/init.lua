@@ -40,7 +40,7 @@ if is_loaded('paq') then
 
     'editorconfig/editorconfig-vim';
     'ojroques/nvim-bufdel';
-    'phaazon/hop.nvim';
+    'ggandor/lightspeed.nvim';
     {'junegunn/fzf', run = fn['fzf#install']};
     'junegunn/fzf.vim';
     'windwp/nvim-autopairs';
@@ -92,8 +92,8 @@ local t = function(str)
   return api.nvim_replace_termcodes(str, true, true, true)
 end
 
-if is_loaded('surround') then
-  require('surround').setup {}
+if is_loaded('lightspeed') then
+  require'lightspeed'.setup {}
 end
 
 if is_loaded('nvim-autopairs') then
