@@ -86,6 +86,10 @@ if is_loaded('nvim-web-devicons') then
   }
 end
 
+if is_loaded('nvim-tree') then
+  require('nvim-tree').setup {}
+end
+
 local check_backspace = function()
   local col = fn.col('.') - 1
 
@@ -174,7 +178,7 @@ if is_loaded('lualine') then
       component_separators = "",
       icons_enabled = true,
       section_separators = "",
-      theme = 'oceanicnext'
+      theme = 'OceanicNext'
     },
     sections = {
       lualine_a = {'mode'},
