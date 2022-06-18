@@ -3,7 +3,7 @@ local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
+local scopes = { o = vim.o, b = vim.bo, w = vim.wo, g = vim.g }
 
 local function opt(scope, key, value)
   scopes[scope][key] = value
@@ -13,7 +13,7 @@ end
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then options = vim.tbl_extend('force', options, opts) end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local function is_loaded(name)
@@ -32,16 +32,22 @@ if is_loaded('paq') then
     'nvim-lua/popup.nvim';
     'nvim-lua/plenary.nvim';
 
-    'mhartington/oceanic-next';
-    'nvim-lualine/lualine.nvim';
+    'nvim-telescope/telescope.nvim';
+    {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'};
 
      {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']};
+    'nvim-treesitter/nvim-treesitter-textobjects';
     'nvim-treesitter/playground';
+
+    'mhartington/oceanic-next';
+    'nvim-lualine/lualine.nvim';
 
     'editorconfig/editorconfig-vim';
     'ojroques/nvim-bufdel';
     'ggandor/lightspeed.nvim';
     'windwp/nvim-autopairs';
+
+    'chentau/marks.nvim';
 
     'elixir-editors/vim-elixir';
 
@@ -62,16 +68,14 @@ if is_loaded('paq') then
     'hrsh7th/vim-vsnip';
     'hrsh7th/nvim-cmp';
 
-    'nvim-telescope/telescope.nvim';
-    {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'};
-
     'kyazdani42/nvim-web-devicons';
     'kyazdani42/nvim-tree.lua';
   }
 end
 
-g['python_host_prog'] = fn.expand('~/.pyenv/versions/neovim2/bin/python')
 g['python3_host_prog'] = fn.expand('~/.pyenv/versions/neovim3/bin/python')
+g['loaded_node_provider'] = 0
+g['loaded_perl_provider'] = 0
 
 if is_loaded('kommentary.config') then
   require('kommentary.config').use_extended_mappings()
@@ -105,6 +109,10 @@ if is_loaded('lightspeed') then
   require'lightspeed'.setup {}
 end
 
+if is_loaded('marks') then
+  require('marks').setup {}
+end
+
 if is_loaded('nvim-autopairs') then
   require('nvim-autopairs').setup {}
 end
@@ -120,13 +128,12 @@ if is_loaded('telescope') then
   telescope.load_extension('fzf')
 end
 
-local has_words_before = function()
-  local line, col = unpack(api.nvim_win_get_cursor(0))
-  return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 if is_loaded('cmp') then
   local cmp = require'cmp'
+  local has_words_before = function()
+    local line, col = unpack(api.nvim_win_get_cursor(0))
+    return col ~= 0 and api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
 
   cmp.setup {
     snippet = {
@@ -134,7 +141,7 @@ if is_loaded('cmp') then
         fn['vsnip#anonymous'](args.body)
       end,
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -150,7 +157,7 @@ if is_loaded('cmp') then
           cmp.select_prev_item()
         end
       end, {'i', 's'})
-    },
+    }),
     sources = cmp.config.sources({{ name = 'nvim_lsp' }, { name = 'buffer' }})
   }
 end
@@ -214,18 +221,20 @@ if is_loaded('hop') then
 end
 
 -------------------- TREE-SITTER ---------------------------
-if is_loaded('nvim-treesitter.config') then
+if is_loaded('nvim-treesitter.configs') then
   require('nvim-treesitter.configs').setup {
-    ensure_installed = 'maintained',
+    ensure_installed = 'all',
     highlight = { enable = true },
+    indent = { enable = true },
     query_linter = { enable = true }
   }
 end
 
 --- OPTIONS -------------------------------------------------
+g['oceanic_next_terminal_bold'] = 1
+g['oceanic_next_terminal_italic'] = 1
+
 local indent = 2
-cmd 'colorscheme OceanicNext'
-cmd 'syntax enable'
 opt('w', 'colorcolumn', '80,120')
 opt('b', 'expandtab', true)
 opt('b', 'shiftwidth', indent)
@@ -247,9 +256,11 @@ opt('w', 'number', true)
 opt('w', 'relativenumber', true)
 opt('w', 'wrap', false)
 opt('o', 'inccommand', 'nosplit')
+opt('w', 'foldmethod', 'expr')
+opt('w', 'foldexpr', 'nvim_treesitter#foldexpr()')
 
-g['oceanic_next_terminal_bold'] = 1
-g['oceanic_next_terminal_italic'] = 1
+cmd 'syntax enable'
+cmd 'colorscheme OceanicNext'
 
 api.nvim_exec([[
   augroup NumberToggle
@@ -282,8 +293,8 @@ map('n', '<C-j>', '<C-w>j')
 map('n', '<C-k>', '<C-w>k')
 map('n', '<C-l>', '<C-w>l')
 
-map('n', '<space>e', ':NvimTreeToggle<CR>')
-map('n', '<space>E', ':NvimTreeFindFile<CR>')
+map('n', '<space>e', ':NvimTreeRefresh<CR>:NvimTreeToggle<CR>')
+map('n', '<space>E', ':NvimTreeRefresh<CR>:NvimTreeFindFile<CR>')
 
 --- TAB NAVIGATION
 map('n', 'tn', ':tabnew<Space>')
@@ -293,6 +304,7 @@ map('n', 'th', ':tabfirst<CR>')
 map('n', 'tl', ':tablast<CR>')
 
 map('n', '<space>p', ':Telescope find_files<CR>')
+map('n', '<space>pd', '<cmd>lua require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:h") })<cr>')
 map('n', '<space>g', ':Telescope live_grep<CR>')
 map('n', '<space>b', ':Telescope buffers<CR>')
 map('n', '<space>q', ':BufDel<CR>')
@@ -304,5 +316,5 @@ map('n', '<space>d', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<space>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', '<space>m', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<space>r', '<cmd>lua vim.lsp.buf.references()<CR>')
+map('n', '<space>r', ':Telescope lsp_references')
 map('n', '<space>s', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
