@@ -39,6 +39,7 @@ if is_loaded('paq') then
     'nvim-treesitter/nvim-treesitter-textobjects';
     'nvim-treesitter/playground';
 
+    'rebelot/kanagawa.nvim';
     'mhartington/oceanic-next';
     'nvim-lualine/lualine.nvim';
 
@@ -46,6 +47,7 @@ if is_loaded('paq') then
     'ojroques/nvim-bufdel';
     'ggandor/lightspeed.nvim';
     'windwp/nvim-autopairs';
+    'kylechui/nvim-surround';
 
     'chentau/marks.nvim';
 
@@ -117,6 +119,10 @@ if is_loaded('nvim-autopairs') then
   require('nvim-autopairs').setup {}
 end
 
+if is_loaded('nvim-surround') then
+  require('nvim-surround').setup {}
+end
+
 if is_loaded('gitsigns') then
   require('gitsigns').setup {}
 end
@@ -182,6 +188,13 @@ if is_loaded('lspconfig') then
   }
 end
 
+
+if is_loaded('kanagawa') then
+  require('kanagawa').setup {}
+
+  cmd 'colorscheme kanagawa'
+end
+
 --- LUALINE -------------------------------------------------
 if is_loaded('lualine') then
   require('lualine').setup {
@@ -189,7 +202,7 @@ if is_loaded('lualine') then
       component_separators = "",
       icons_enabled = true,
       section_separators = "",
-      theme = 'OceanicNext'
+      theme = 'kanagawa'
     },
     sections = {
       lualine_a = {'mode'},
@@ -260,7 +273,6 @@ opt('w', 'foldmethod', 'expr')
 opt('w', 'foldexpr', 'nvim_treesitter#foldexpr()')
 
 cmd 'syntax enable'
-cmd 'colorscheme OceanicNext'
 
 api.nvim_exec([[
   augroup NumberToggle
