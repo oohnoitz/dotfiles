@@ -40,7 +40,6 @@ if is_loaded('paq') then
     'nvim-treesitter/playground';
 
     'rebelot/kanagawa.nvim';
-    'mhartington/oceanic-next';
     'nvim-lualine/lualine.nvim';
 
     'editorconfig/editorconfig-vim';
@@ -49,17 +48,14 @@ if is_loaded('paq') then
     'windwp/nvim-autopairs';
     'kylechui/nvim-surround';
 
-    'chentau/marks.nvim';
+    'chentoast/marks.nvim';
 
-    'elixir-editors/vim-elixir';
+    'folke/twilight.nvim';
 
-    'b3nj5m1n/kommentary';
-    'tpope/vim-eunuch';
-    'tpope/vim-repeat';
+    'numToStr/Comment.nvim';
     'kana/vim-textobj-user';
 
     'lewis6991/gitsigns.nvim';
-    'tpope/vim-rhubarb';
 
     'neovim/nvim-lspconfig';
     'hrsh7th/cmp-nvim-lsp';
@@ -79,8 +75,8 @@ g['python3_host_prog'] = fn.expand('~/.pyenv/versions/neovim3/bin/python')
 g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
 
-if is_loaded('kommentary.config') then
-  require('kommentary.config').use_extended_mappings()
+if is_loaded('Comment') then
+  require('Comment').setup {}
 end
 
 if is_loaded('nvim-web-devicons') then
@@ -134,6 +130,10 @@ if is_loaded('telescope') then
   telescope.load_extension('fzf')
 end
 
+if is_loaded('twilight') then
+  require('twilight').setup {}
+end
+
 if is_loaded('cmp') then
   local cmp = require'cmp'
   local has_words_before = function()
@@ -172,6 +172,7 @@ end
 if is_loaded('lspconfig') then
   local lsp = require('lspconfig')
   local cap = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local util = require('lspconfig.util')
 
   lsp.cssls.setup {
     capabilities = cap
@@ -181,6 +182,33 @@ if is_loaded('lspconfig') then
     filetypes = { 'elixir', 'eelixir', 'heex' },
     cmd = { vim.loop.os_homedir() .. '/.lsp/elixir-ls/release/language_server.sh' },
     capabilities = cap
+  }
+
+  lsp.phpactor.setup {
+    cmd = { vim.loop.os_homedir() .. '/.lsp/phpactor/bin/phpactor', 'language-server' },
+    capabilities = cap
+  }
+
+  lsp.tailwindcss.setup {
+    capabilities = cap,
+    settings = {
+      tailwindCSS = {
+        classAttributes = { "class", "className", "classList", "ngClass" },
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "error",
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning"
+        },
+        includeLanguages = {
+          heex = "html",
+        },
+        validate = true,
+      }
+    },
   }
 
   lsp.tsserver.setup {
