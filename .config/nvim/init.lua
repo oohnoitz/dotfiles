@@ -25,69 +25,111 @@ local function is_loaded(name)
 end
 
 --- PLUGINS -------------------------------------------------
-if is_loaded('paq') then
-  require('paq') {
-    'savq/paq-nvim';
-
-    'nvim-lua/popup.nvim';
-    'nvim-lua/plenary.nvim';
-
-    'nvim-telescope/telescope.nvim';
-    {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'};
-
-     {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']};
-    'nvim-treesitter/nvim-treesitter-textobjects';
-    'nvim-treesitter/playground';
-
-    'rebelot/kanagawa.nvim';
-    'nvim-lualine/lualine.nvim';
-
-    'editorconfig/editorconfig-vim';
-    'ojroques/nvim-bufdel';
-    'ggandor/lightspeed.nvim';
-    'windwp/nvim-autopairs';
-    'kylechui/nvim-surround';
-
-    'chentoast/marks.nvim';
-
-    'folke/twilight.nvim';
-
-    'numToStr/Comment.nvim';
-    'kana/vim-textobj-user';
-
-    'lewis6991/gitsigns.nvim';
-
-    'neovim/nvim-lspconfig';
-    'hrsh7th/cmp-nvim-lsp';
-    'hrsh7th/cmp-buffer';
-    'hrsh7th/cmp-path';
-    'hrsh7th/cmp-cmdline';
-    'hrsh7th/cmp-vsnip';
-    'hrsh7th/vim-vsnip';
-    'hrsh7th/nvim-cmp';
-
-    'kyazdani42/nvim-web-devicons';
-    'kyazdani42/nvim-tree.lua';
-  }
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
+
+require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
+  use 'nvim-lua/popup.nvim'
+  use 'nvim-lua/plenary.nvim'
+
+  use 'nvim-telescope/telescope.nvim';
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
+
+  use {'nvim-treesitter/nvim-treesitter', run = fn['TSUpdate']}
+  use 'nvim-treesitter/nvim-treesitter-textobjects'
+  use 'nvim-treesitter/playground'
+
+  use 'editorconfig/editorconfig-vim'
+  use 'ojroques/nvim-bufdel'
+  use 'ggandor/lightspeed.nvim'
+  use 'windwp/nvim-autopairs'
+  use {
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup()
+    end
+  }
+
+  use 'chentoast/marks.nvim'
+
+  use 'folke/twilight.nvim'
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
+  use 'kana/vim-textobj-user'
+
+  use 'lewis6991/gitsigns.nvim'
+  use 'sindrets/diffview.nvim'
+  use {
+    'TimUntersberger/neogit',
+    config = function()
+      require('neogit').setup({
+        integrations = {
+          diffview = true,
+        },
+      })
+    end
+  }
+
+  use 'andythigpen/nvim-coverage'
+
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/nvim-cmp'
+
+  use {
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-web-devicons').setup({
+        default = true;
+      })
+    end
+  }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup({
+        view = {
+          adaptive_size = true,
+        },
+      })
+    end
+  }
+
+  use {
+    'rebelot/kanagawa.nvim',
+    commit = 'fc2e308'
+  }
+  use 'nvim-lualine/lualine.nvim'
+
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
 
 g['python3_host_prog'] = fn.expand('~/.pyenv/versions/neovim3/bin/python')
 g['loaded_node_provider'] = 0
 g['loaded_perl_provider'] = 0
-
-if is_loaded('Comment') then
-  require('Comment').setup {}
-end
-
-if is_loaded('nvim-web-devicons') then
-  require('nvim-web-devicons').setup {
-    default = true;
-  }
-end
-
-if is_loaded('nvim-tree') then
-  require('nvim-tree').setup {}
-end
 
 local check_backspace = function()
   local col = fn.col('.') - 1
@@ -101,37 +143,6 @@ end
 
 local t = function(str)
   return api.nvim_replace_termcodes(str, true, true, true)
-end
-
-if is_loaded('lightspeed') then
-  require'lightspeed'.setup {}
-end
-
-if is_loaded('marks') then
-  require('marks').setup {}
-end
-
-if is_loaded('nvim-autopairs') then
-  require('nvim-autopairs').setup {}
-end
-
-if is_loaded('nvim-surround') then
-  require('nvim-surround').setup {}
-end
-
-if is_loaded('gitsigns') then
-  require('gitsigns').setup {}
-end
-
-if is_loaded('telescope') then
-  local telescope = require('telescope')
-
-  telescope.setup {}
-  telescope.load_extension('fzf')
-end
-
-if is_loaded('twilight') then
-  require('twilight').setup {}
 end
 
 if is_loaded('cmp') then
@@ -171,7 +182,7 @@ end
 --- LSP -----------------------------------------------------
 if is_loaded('lspconfig') then
   local lsp = require('lspconfig')
-  local cap = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local cap = require('cmp_nvim_lsp').default_capabilities()
   local util = require('lspconfig.util')
 
   lsp.cssls.setup {
@@ -217,13 +228,11 @@ if is_loaded('lspconfig') then
 end
 
 
+--- LUALINE -------------------------------------------------
 if is_loaded('kanagawa') then
-  require('kanagawa').setup {}
-
   cmd 'colorscheme kanagawa'
 end
 
---- LUALINE -------------------------------------------------
 if is_loaded('lualine') then
   require('lualine').setup {
     options = {
@@ -267,7 +276,54 @@ if is_loaded('nvim-treesitter.configs') then
     ensure_installed = 'all',
     highlight = { enable = true },
     indent = { enable = true },
-    query_linter = { enable = true }
+    query_linter = { enable = true },
+    textobjects = {
+      select = {
+        enable = true,
+        lookahead = true,
+        keymaps = {
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+        },
+        selection_modes = {
+          ['@parameter.outer'] = 'v',
+          ['@function.outer'] = 'V',
+          ['@class.outer'] = '<c-v>',
+        },
+        include_surrounding_whitespace = true,
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>a"] = "@parameter.inner",
+        },
+        swap_previous = {
+          ["<leader>A"] = "@parameter.inner",
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true,
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
+        },
+      },
+    },
   }
 end
 
