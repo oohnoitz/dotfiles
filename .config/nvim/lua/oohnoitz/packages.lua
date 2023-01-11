@@ -25,8 +25,12 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/playground'
 
   use 'editorconfig/editorconfig-vim'
+
   use 'ojroques/nvim-bufdel'
+  use 'mbbill/undotree'
+
   use 'ggandor/lightspeed.nvim'
+
   use 'windwp/nvim-autopairs'
   use {
     'kylechui/nvim-surround',
