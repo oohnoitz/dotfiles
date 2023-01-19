@@ -40,6 +40,12 @@ require('packer').startup(function(use)
   }
 
   use 'folke/twilight.nvim'
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup()
+    end
+  }
 
   use {
     'numToStr/Comment.nvim',
