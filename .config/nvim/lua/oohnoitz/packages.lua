@@ -69,27 +69,26 @@ require('packer').startup(function(use)
   }
 
   use {
-    'neovim/nvim-lspconfig',
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v1.x',
     requires = {
-      'hrsh7th/cmp-nvim-lsp',
-    },
-    config = function()
-      require('oohnoitz.packages.lsp')
-    end
-  }
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},             -- Required
+      {'williamboman/mason.nvim'},           -- Optional
+      {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-  use {'hrsh7th/cmp-nvim-lsp', requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-buffer',   requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-path',     requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-cmdline',  requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/cmp-vsnip',    requires = 'hrsh7th/nvim-cmp'}
-  use {'hrsh7th/vim-vsnip',    requires = 'hrsh7th/nvim-cmp'}
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},         -- Required
+      {'hrsh7th/cmp-nvim-lsp'},     -- Required
+      {'hrsh7th/cmp-buffer'},       -- Optional
+      {'hrsh7th/cmp-path'},         -- Optional
+      {'saadparwaiz1/cmp_luasnip'}, -- Optional
+      {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
-  use {
-    'hrsh7th/nvim-cmp',
-    config = function()
-      require('oohnoitz.packages.cmp')
-    end
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},             -- Required
+      {'rafamadriz/friendly-snippets'}, -- Optional
+    }
   }
 
   use {
