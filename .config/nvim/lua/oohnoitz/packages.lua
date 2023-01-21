@@ -55,8 +55,15 @@ require('packer').startup(function(use)
   }
   use 'kana/vim-textobj-user'
 
-  use 'lewis6991/gitsigns.nvim'
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+
   use 'sindrets/diffview.nvim'
+
   use {
     'TimUntersberger/neogit',
     config = function()
