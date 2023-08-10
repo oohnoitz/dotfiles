@@ -1,8 +1,2 @@
-local ok, impatient = pcall(require, 'impatient')
-if ok then
-  impatient.enable_profile()
-else
-  vim.notify(impatient)
-end
-
-require('oohnoitz')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
