@@ -20,15 +20,6 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-# Theme Prompt
-PROMPT_THEME="$HOME/.config/zsh/themes"
-if [ -d $PROMPT_THEME ]; then
-  PURE_GIT_PULL=0
-  fpath+=("$PROMPT_THEME")
-  autoload -U promptinit && promptinit
-  prompt pure
-fi
-
 # User Configuration
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
