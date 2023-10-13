@@ -4,12 +4,6 @@
 [submodule ".fzf"]
 	path = .fzf
 	url = https://github.com/junegunn/fzf
-[submodule ".tmux"]
-	path = .tmux
-	url = https://github.com/gpakosz/.tmux.git
-[submodule ".config/zsh/themes/pure"]
-	path = .config/zsh/themes/pure
-	url = https://github.com/sindresorhus/pure.git
 [submodule ".fpp"]
 	path = .fpp
 	url = https://github.com/facebook/PathPicker.git
