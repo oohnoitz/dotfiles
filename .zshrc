@@ -31,8 +31,6 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.pyenv/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if command -v pyenv 1>/dev/null 2>&1; then
