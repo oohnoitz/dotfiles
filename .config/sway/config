@@ -14,11 +14,11 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term wezterm
 # Your preferred application launcher
-set $file alacritty -e ranger
+set $file wezterm start -- lf
 # set $file alacritty -e ranger
-set $menu wofi --show run
+set $menu fuzzel
 set $lockscreen ~/.local/bin/lock-screen
 set $screenshot ~/.local/bin/screenshot
 
@@ -30,7 +30,7 @@ gaps outer 0
 default_border pixel 2
 hide_edge_borders both
 
-font Knack Nerd Font 11
+font JetBrainsMono Nerd Font 11
 
 ### Decoration
 #
@@ -58,16 +58,7 @@ set $white    #EEEEEC
   client.urgent           $lgreen   $black     $gray   $lgreen    $lgreen
 
 ### Output configuration
-#
-output DP-1 pos    0,0 res 3840x2160 scale 1
-output DP-2 pos 3840,0 res 3840x2160 scale 1
-output DP-3 pos 7680,0 res 3840x2160 scale 1
-# output DP-3 pos 7680,0 res 3840x2160 scale 1.5
-
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output DP-1 bg ~/Downloads/DP-0.jpg fill
-output DP-2 bg ~/Downloads/DP-1.jpg fill
-output DP-3 bg ~/Downloads/DP-2.jpg fill
+output eDP-1 pos 0,0 res 2256x1504 scale 1
 
 ### Input configuration
 #
@@ -82,11 +73,9 @@ output DP-3 bg ~/Downloads/DP-2.jpg fill
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input "1133:16495:Logitech_MX_Ergo" {
-  natural_scroll disabled
-  middle_emulation enabled
-  scroll_factor 5
-  pointer_accel 0.75
+input "1:1:AT_Translated_Set_2_keyboard" {
+  xkb_layout us
+  xkb_options ctrl:nocaps
 }
 
 ### Key bindings
@@ -95,7 +84,7 @@ input "1133:16495:Logitech_MX_Ergo" {
 #
     # start a terminal
     bindsym $mod+Return exec $term
-    bindsym $mod+Control+Return exec alacritty
+    bindsym $mod+Control+Return exec $term
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -112,14 +101,16 @@ input "1133:16495:Logitech_MX_Ergo" {
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+c reload-
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exit
 
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +1%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -1%
-    bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+    bindsym XF86MonBrightnessUp exec brightnessctl -d amdgpu_bl1 s 10%+
+    bindsym XF86MonBrightnessDown exec brightnessctl -d amdgpu_bl1 s 10%-
+    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
+    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
+    bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
     bindsym XF86AudioNext exec mpc next
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioPlay exec mpc toggle
@@ -244,7 +235,6 @@ mode "resize" {
 bar {
     position top
     swaybar_command waybar
-    font "Fura Code Nerd Font"
     colors {
         statusline #ffffff
         background #00000000
