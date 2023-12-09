@@ -24,13 +24,12 @@ set $screenshot ~/.local/bin/screenshot
 
 bindsym $mod+m exec $lockscreen
 
-gaps inner 4
-gaps outer 0
+gaps inner 10
 
 default_border pixel 2
 hide_edge_borders both
 
-font JetBrainsMono Nerd Font 11
+font JetBrainsMono Nerd Font 12
 
 ### Decoration
 #
@@ -59,6 +58,7 @@ set $white    #EEEEEC
 
 ### Output configuration
 output eDP-1 pos 0,0 res 2256x1504 scale 1
+output * bg ~/background.jpg fill
 
 ### Input configuration
 #
@@ -75,7 +75,7 @@ output eDP-1 pos 0,0 res 2256x1504 scale 1
 # Read `man 5 sway-input` for more information about this section.
 input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout us
-  xkb_options ctrl:nocaps
+  # xkb_options ctrl:nocaps
 }
 
 ### Key bindings
@@ -235,11 +235,6 @@ mode "resize" {
 bar {
     position top
     swaybar_command waybar
-    colors {
-        statusline #ffffff
-        background #00000000
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
 }
 
 include /etc/sway/config.d/*
