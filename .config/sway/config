@@ -114,7 +114,12 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     bindsym XF86AudioNext exec mpc next
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioPlay exec mpc toggle
-    bindsym Print exec $screenshot
+
+    bindsym Print        exec grimshot copy output
+    bindsym Mod4+p       exec grimshot save active
+    bindsym Mod4+Shift+p exec grimshot save area
+    bindsym Mod4+Mod1+p  exec grimshot save output
+    bindsym Mod4+Ctrl+p  exec grimshot save window
 #
 # Moving around:
 #
