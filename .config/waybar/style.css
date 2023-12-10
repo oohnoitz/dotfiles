@@ -59,6 +59,7 @@ window#waybar.hidden {
 
 #window {
   margin: 0 4px;
+  font-weight: 800;
 }
 
 #clock {
@@ -256,6 +257,19 @@ window#waybar.hidden {
     transition: none;
     color: #ffffff;
     background: #383c4a;
+}
+
+#bluetooth {
+    margin-right: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 10px;
+    transition: none;
+    color: #ffffff;
+    background: #383c4a;
+}
+
+#bluetooth.disabled {
 }
 
 #cpu {

@@ -2,7 +2,7 @@
     "margin": "10 10 0 10",
     "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": ["pulseaudio", "network", "cpu", "temperature", "memory", "backlight", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "bluetooth", "cpu", "temperature", "memory", "backlight", "battery", "clock", "tray"],
 
     //***************************
     //*  Modules configuration  *
@@ -24,12 +24,12 @@
 
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%y.%m.%d %I:%M %p}"
+        "format": "{:%m.%d %I:%M %p}"
     },
 
     "pulseaudio": {
         "reverse-scrolling": 1,
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}% {icon}   {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
@@ -58,13 +58,17 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
 
+    "bluetooth": {
+      "format-disabled": ""
+    },
+
     "cpu": {
         "format": "{usage}% ",
         "tooltip": false
     },
 
     "memory": {
-        "format": "{} 󰍛",
+        "format": "{}% 󰍛",
     },
 
     "temperature": {
