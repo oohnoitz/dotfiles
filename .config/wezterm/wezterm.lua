@@ -61,6 +61,11 @@ return {
 			action = act.ActivateTabRelative(1),
 		},
 		{
+			key = "Tab",
+			mods = "CTRL|SHIFT",
+			action = act.ActivateTabRelative(-1),
+		},
+		{
 			key = "h",
 			mods = "CTRL|SHIFT",
 			action = act.ActivatePaneDirection("Left"),
