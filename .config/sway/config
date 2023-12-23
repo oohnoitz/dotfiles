@@ -19,10 +19,9 @@ set $term wezterm
 set $file wezterm start -- lf
 # set $file alacritty -e ranger
 set $menu fuzzel
-set $lockscreen ~/.local/bin/lock-screen
 set $screenshot ~/.local/bin/screenshot
 
-bindsym $mod+m exec $lockscreen
+bindsym $mod+m exec wlogout -p layer-shell
 
 gaps inner 10
 
