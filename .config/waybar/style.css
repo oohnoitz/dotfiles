@@ -1,6 +1,6 @@
 * {
     border: none;
-    border-radius: 0;
+    padding: 0px;
     font-family: FontAwesome, Symbols Nerd Font Mono, JetBrainsMono Nerd Font;
     font-size: 12px;
 }
@@ -14,18 +14,18 @@ window#waybar.hidden {
 }
 
 #workspaces {
-    margin-right: 8;
-    padding: 0 8px 0 8px;
-    border-radius: 10px;
+    margin-right: 8px;
+    padding: 0;
     transition: none;
     background: #383c4a;
 }
 
 #workspaces button {
+    padding: 5px 8px;
+    border-radius: 0;
     transition: none;
     color: #7c818c;
     background: transparent;
-    padding: 5px;
     font-size: 18px;
 }
 
@@ -34,154 +34,9 @@ window#waybar.hidden {
     font-size: 12px;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#workspaces button:hover {
-    transition: none;
-    box-shadow: inherit;
-    text-shadow: inherit;
-    border-radius: inherit;
-    color: #383c4a;
-    background: #7c818c;
-}
-
-#workspaces button.focused {
-    color: white;
-}
-
-#mode {
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#window {
-  margin: 0 4px;
-  font-weight: 800;
-}
-
-#clock {
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px 0px 0px 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#pulseaudio {
-    margin-right: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
-}
-
-#temperature {
-    margin-right: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
-}
-
-#backlight {
-    margin-right: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#battery {
-    margin-right: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-#battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-#battery.warning:not(.charging) {
-    background-color: #ffbe61;
-    color: black;
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#tray {
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: #383c4a;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-window#waybar {
+#workspaces button.active {
     background: transparent;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-#workspaces {
-    margin-right: 8px;
-    border-radius: 10px;
-    transition: none;
-    background: #383c4a;
-}
-
-#workspaces button {
-    transition: none;
-    color: #7c818c;
-    background: transparent;
-    padding: 5px;
-    font-size: 18px;
-}
-
-#workspaces button.persistent {
-    color: #7c818c;
-    font-size: 12px;
+    color: #dfdfdf; 
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -189,7 +44,6 @@ window#waybar.hidden {
     transition: none;
     box-shadow: inherit;
     text-shadow: inherit;
-    border-radius: inherit;
     color: #383c4a;
     background: #7c818c;
 }
@@ -201,7 +55,6 @@ window#waybar.hidden {
 #language {
     padding-left: 16px;
     padding-right: 8px;
-    border-radius: 10px 0px 0px 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -210,7 +63,6 @@ window#waybar.hidden {
 #keyboard-state {
     margin-right: 8px;
     padding-right: 16px;
-    border-radius: 0px 10px 10px 0px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -219,26 +71,31 @@ window#waybar.hidden {
 #mode {
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
 }
 
-#clock {
+#window {
+  margin: 0 4px;
+  font-weight: 800;
+}
+
+#idle_inhibitor {
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
+}
+
+#idle_inhibitor.activated {
+    background-color: #eb4d4b;
 }
 
 #pulseaudio {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -250,20 +107,16 @@ window#waybar.hidden {
 }
 
 #network {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
 }
 
 #bluetooth {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -273,30 +126,24 @@ window#waybar.hidden {
 }
 
 #cpu {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
 }
 
 #memory {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
 }
 
 #temperature {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -307,20 +154,16 @@ window#waybar.hidden {
 }
 
 #backlight {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
 }
 
 #battery {
-    margin-right: 8px;
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
@@ -346,11 +189,17 @@ window#waybar.hidden {
     animation-direction: alternate;
 }
 
-#tray {
-    margin-left: 8px;
+#clock {
     padding-left: 16px;
     padding-right: 16px;
-    border-radius: 10px;
+    transition: none;
+    color: #ffffff;
+    background: #383c4a;
+}
+
+#tray {
+    padding-left: 16px;
+    padding-right: 16px;
     transition: none;
     color: #ffffff;
     background: #383c4a;
