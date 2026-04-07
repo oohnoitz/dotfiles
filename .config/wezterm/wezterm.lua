@@ -1,19 +1,45 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 
-return {
+wezterm.on("update-right-status", function(window, _)
+	window:set_right_status(window:active_workspace())
+end)
+
+wezterm.on("augment-command-palette", function(_, _)
+	return {
+		{
+			brief = "Configure Workspace for Development Environment",
+			action = wezterm.action_callback(function(window, _, _)
+				local parent = window:mux_window()
+
+				parent:active_tab():set_title("🤖")
+
+				local tab_edit, _, _ = parent:spawn_tab({ args = { "nvim" } })
+				tab_edit:set_title("💻")
+
+				local tab_scratch, _, _ = parent:spawn_tab({})
+				tab_scratch:set_title("📝")
+
+				tab_edit:activate()
+			end),
+		},
+	}
+end)
+
+local config = {
 	disable_default_key_bindings = true,
-	leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 },
+	scrollback_lines = 100000,
 	keys = {
 		{
-			key = "-",
-			mods = "LEADER",
-			action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+			key = "a",
+			mods = "CTRL",
+			action = act.SendKey({ key = "a", mods = "CTRL" }),
 		},
 		{
-			key = "_",
-			mods = "LEADER|SHIFT",
-			action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+			key = "P",
+			mods = "CTRL",
+			action = act.ActivateCommandPalette,
 		},
 		{
 			key = "R",
@@ -36,19 +62,9 @@ return {
 			action = act.ActivateCopyMode,
 		},
 		{
-			key = "Space",
-			mods = "CTRL|SHIFT",
-			action = act.QuickSelect,
-		},
-		{
 			key = "F",
 			mods = "CTRL|SHIFT",
 			action = act.Search({ CaseInSensitiveString = "" }),
-		},
-		{
-			key = "Z",
-			mods = "CTRL|SHIFT",
-			action = act.TogglePaneZoomState,
 		},
 		{
 			key = "t",
@@ -66,47 +82,42 @@ return {
 			action = act.ActivateTabRelative(-1),
 		},
 		{
-			key = "h",
+			key = "K",
 			mods = "CTRL|SHIFT",
-			action = act.ActivatePaneDirection("Left"),
+			action = act.ClearScrollback("ScrollbackAndViewport"),
 		},
 		{
-			key = "l",
+			key = "S",
 			mods = "CTRL|SHIFT",
-			action = act.ActivatePaneDirection("Right"),
+			action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
 		},
 		{
-			key = "k",
-			mods = "CTRL|SHIFT",
-			action = act.ActivatePaneDirection("Up"),
-		},
-		{
-			key = "j",
-			mods = "CTRL|SHIFT",
-			action = act.ActivatePaneDirection("Down"),
-		},
-		{
-			key = "Enter",
-			mods = "ALT",
-			action = act.ToggleFullScreen,
-		},
-		{
-			key = "E",
+			key = "W",
 			mods = "CTRL|SHIFT",
 			action = act.PromptInputLine({
-				description = "Enter new name for tab",
+				description = "Create Workspace",
 				action = wezterm.action_callback(function(window, pane, line)
-					-- line will be `nil` if they hit escape without entering anything
-					-- An empty string if they just hit enter
-					-- Or the actual line of text they wrote
 					if line then
-						window:active_tab():set_title(line)
+						window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
+					end
+				end),
+			}),
+		},
+		{
+			key = "$",
+			mods = "CTRL|SHIFT",
+			action = act.PromptInputLine({
+				description = "Rename Workspace",
+				action = wezterm.action_callback(function(window, _, line)
+					if line then
+						mux.rename_workspace(window:active_workspace(), line)
 					end
 				end),
 			}),
 		},
 	},
 	force_reverse_video_cursor = true,
+	window_background_opacity = 0.99,
 	colors = {
 		foreground = "#dcd7ba",
 		background = "#1f1f28",
@@ -125,11 +136,14 @@ return {
 		brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
 		indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
 	},
-	wsl_domains = {
-		{
-			name = "WSL:Ubuntu-20.04",
-			distribution = "Ubuntu-20.04",
-			default_cwd = "~",
-		},
-	},
 }
+
+for i = 1, 8 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "CTRL|ALT",
+		action = act.ActivateTab(i - 1),
+	})
+end
+
+return config
