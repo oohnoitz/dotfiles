@@ -14,49 +14,37 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term wezterm
-# Your preferred application launcher
-set $file wezterm start -- lf
+set $term wezterm start --new-tab
 # set $file alacritty -e ranger
 set $menu fuzzel
-set $screenshot ~/.local/bin/screenshot
 
-bindsym $mod+m exec wlogout -p layer-shell
-
-gaps inner 10
+bindsym $mod+Shift+m exec wlogout -p layer-shell
 
 default_border pixel 2
-hide_edge_borders both
+hide_edge_borders smart
 
 font JetBrainsMono Nerd Font 12
 
 ### Decoration
 #
-set $black    #080808
-set $red      #F51024
-set $green    #4E9A06
-set $yellow   #C4A000
-set $blue     #254775
-set $magenta  #75507B
-set $cyan     #06989A
-set $gray     #A5A5A5
-set $darkgray #555753
-set $lred     #FF4444
-set $lgreen   #74FF00
-set $lyellow  #FCE94F
-set $lblue    #4A84D8
-set $lmagenta #AD7FA8
-set $lcyan    #34E2E2
-set $white    #EEEEEC
+set $rosewater #f4dbd6
+set $peach #f5a97f
+set $lavender #b7bdf8
+set $text #cad3f5
+set $overlay0 #6e738d
+set $base #24273a
 
 # Color                   border    background text    indicator  child_border
-  client.focused          $lmagenta $black     $gray   $lmagenta  $lmagenta
-  client.focused_inactive $black    $black     $gray   $black     $black
-  client.unfocused        $black    $black     $gray   $black     $black
-  client.urgent           $lgreen   $black     $gray   $lgreen    $lgreen
+client.focused            $lavender $base      $text   $rosewater $lavender
+client.focused_inactive   $overlay0 $base      $text   $rosewater $overlay0
+client.unfocused          $overlay0 $base      $text   $rosewater $overlay0
+client.urgent             $peach    $base      $peach  $overlay0  $peach
+client.placeholder        $overlay0 $base      $text   $overlay0  $overlay0
+client.background         $base
 
 ### Output configuration
 output eDP-1 pos 0,0 res 2256x1504 scale 1
+# output DP-3 pos 2256,0 res 3840x2160 scale 1
 output * bg ~/background.jpg fill
 
 ### Input configuration
@@ -74,8 +62,9 @@ output * bg ~/background.jpg fill
 # Read `man 5 sway-input` for more information about this section.
 input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout us
-  # xkb_options ctrl:nocaps
 }
+
+focus_follows_mouse no
 
 ### Key bindings
 #
@@ -90,7 +79,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 
     # start your launcher
     bindsym $mod+space exec $menu
-    bindsym $mod+Shift+Return exec $file
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -102,17 +90,14 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exit
-
     bindsym XF86MonBrightnessUp exec brightnessctl -d amdgpu_bl1 s 10%+
     bindsym XF86MonBrightnessDown exec brightnessctl -d amdgpu_bl1 s 10%-
     bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
     bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
     bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioNext exec mpc next
-    bindsym XF86AudioPrev exec mpc prev
-    bindsym XF86AudioPlay exec mpc toggle
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
+    bindsym XF86AudioPlay exec playerctl play-pause
 
     bindsym Print        exec grimshot copy output
     bindsym Mod4+p       exec grimshot save active
@@ -143,10 +128,17 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+    bindsym $mod+Shift+Ctrl+$left move workspace to output left
+    bindsym $mod+Shift+Ctrl+$right move workspace to output right
+    bindsym $mod+Shift+Ctrl+Left move workspace to output left
+    bindsym $mod+Shift+Ctrl+Right move workspace to output right
+
 #
 # Workspaces:
 #
     # switch to workspace
+    bindsym $mod+Tab workspace back_and_forth
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
     bindsym $mod+3 workspace 3
@@ -216,21 +208,51 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
+    bindsym $left resize shrink width 1 px or 1 ppt
+    bindsym $down resize grow height 1 px or 1 ppt
+    bindsym $up resize shrink height 1 px or 1 ppt
+    bindsym $right resize grow width 1 px or 1 ppt
 
     # ditto, with arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 1 px or 1 ppt
+    bindsym Down resize grow height 1 px or 1 ppt
+    bindsym Up resize shrink height 1 px or 1 ppt
+    bindsym Right resize grow width 1 px or 1 ppt
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+mode Mouse {
+    bindsym a mode default, exec 'wl-kbptr-sway-active-win; swaymsg mode Mouse'
+    bindsym Shift+a mode default, exec 'wl-kbptr; swaymsg mode Mouse'
+
+    # Mouse move
+    bindsym h seat seat0 cursor move -15 0
+    bindsym j seat seat0 cursor move 0 15
+    bindsym k seat seat0 cursor move 0 -15
+    bindsym l seat seat0 cursor move 15 0
+
+    # Left button
+    bindsym s seat seat0 cursor press button1
+    bindsym --release s seat seat0 cursor release button1
+
+    # Middle button
+    bindsym d seat seat0 cursor press button2
+    bindsym --release d seat seat0 cursor release button2
+
+    # Right button
+    bindsym f seat seat0 cursor press button3
+    bindsym --release f seat seat0 cursor release button3
+
+    bindsym Escape mode default
+}
+
+bindsym $mod+g exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
+bindsym $mod+Shift+g mode Mouse
+bindsym $mod+Shift+n exec swaync-client -t -sw
+
 
 #
 # Status Bar:
@@ -240,5 +262,41 @@ bar {
     position top
     swaybar_command waybar
 }
+
+assign [app_id="discord"] workspace number 9
+assign [app_id="Slack"] workspace number 10
+
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output DP-1
+workspace 5 output DP-1
+workspace 6 output eDP-3
+workspace 7 output eDP-3
+workspace 8 output eDP-3
+workspace 9 output eDP-3
+workspace 10 output eDP-3
+
+for_window [app_id="showmethekey-gtk"] {
+  floating enable
+  sticky enable
+}
+
+for_window [app_id="Zoom Workplace"] {
+  floating enable
+}
+
+exec_always {
+  pkill kanshi
+  kanshi &
+}
+
+exec swaync
+
+exec swayidle -w \
+	timeout 300 'swaylock -f -c 000000' \
+	timeout 600 'swaymsg "output * power off"' \
+  resume 'swaymsg "output * power on"' \
+	before-sleep 'swaylock -f -c 000000'
 
 include /etc/sway/config.d/*
