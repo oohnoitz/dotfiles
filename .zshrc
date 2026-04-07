@@ -12,6 +12,10 @@ bindkey -M vicmd v edit-command-line
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
 [ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
 
+HISTORY_IGNORE="(gpgu|ls|cd|pwd|exit|gd|clear)*"
+
+setopt HIST_IGNORE_SPACE
+
 ## History command configuration
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE

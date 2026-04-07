@@ -8,3 +8,20 @@ nuke() {
   fi
 }
 
+cdw() {
+  local dir
+  dir=$(ls -D ~/src/work | fzf)
+
+  if [[ $dir ]]; then
+    cd ~/src/work/$dir
+  fi
+}
+
+cdp() {
+  local dir
+  dir=$(ls -D ~/src/personal | fzf)
+
+  if [[ $dir ]]; then
+    cd ~/src/personal/$dir
+  fi
+}

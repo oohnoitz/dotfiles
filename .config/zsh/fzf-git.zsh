@@ -12,7 +12,7 @@ gf() {
   cut -c4- | sed 's/.* -> //'
 }
 
-gh() {
+ghl() {
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --branches --graph --color=always |
   fzf-down --ansi --no-sort --reverse --multi \
     --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | xargs git show --color=always | head -'$LINES |
