@@ -1,0 +1,5 @@
+alias ls='eza'
+alias lsa='eza -a'
+alias ll='eza -ghHliS'
+alias lla='eza -ghHliSa'
+alias tree='eza -T'

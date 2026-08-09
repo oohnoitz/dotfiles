@@ -1,5 +1,0 @@
-alias ls='exa'
-alias lsa='exa -a'
-alias ll='exa -ghHliS'
-alias lla='exa -ghHliSa'
-alias tree='exa -T'
