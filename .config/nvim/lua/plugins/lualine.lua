@@ -20,7 +20,7 @@ return {
               end,
             },
           },
-          lualine_b = { "branch" },
+          lualine_b = {},
           lualine_c = {
             { "filename", path = 1, separator = "", symbols = { modified = "", readonly = "", unnamed = "" } },
             -- stylua: ignore
@@ -34,24 +34,25 @@ return {
             {
               function() return require("noice").api.status.command.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.ui.fg("Statement"),
+              color = function() return { fg = Snacks.util.color("Statement") } end,
             },
             -- stylua: ignore
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-              color = Util.ui.fg("Constant"),
+              color = function() return { fg = Snacks.util.color("Constant") } end,
             },
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,
               cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.ui.fg("Debug"),
+              color = function() return { fg = Snacks.util.color("Debug") } end,
             },
+            -- stylua: ignore
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = Util.ui.fg("Special"),
+              color = function() return { fg = Snacks.util.color("Special") } end,
             },
           },
           lualine_y = {
@@ -60,7 +61,7 @@ return {
           },
           lualine_z = {},
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "neo-tree", "lazy", "fzf" },
       }
     end,
   },

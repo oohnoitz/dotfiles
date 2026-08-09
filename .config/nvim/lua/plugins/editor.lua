@@ -1,5 +1,17 @@
 return {
-  { "rebelot/kanagawa.nvim" },
+  {
+    "rebelot/kanagawa.nvim",
+    opts = {
+      transparent = true,
+    },
+  },
+
+  {
+    "snacks.nvim",
+    opts = {
+      scroll = { enabled = false },
+    },
+  },
 
   {
     "LazyVim/LazyVim",
@@ -51,5 +63,6 @@ return {
     },
   },
 
-  { "echasnovski/mini.indentscope", enabled = false },
+  { "nvim-mini/mini.indentscope", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
 }
