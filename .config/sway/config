@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term wezterm start --new-tab
+set $term wezterm
 # set $file alacritty -e ranger
 set $menu fuzzel
 
@@ -264,7 +264,7 @@ bar {
 }
 
 assign [app_id="discord"] workspace number 9
-assign [app_id="Slack"] workspace number 10
+assign [app_id="slack"] workspace number 10
 
 workspace 1 output DP-1
 workspace 2 output DP-1
@@ -284,11 +284,6 @@ for_window [app_id="showmethekey-gtk"] {
 
 for_window [app_id="Zoom Workplace"] {
   floating enable
-}
-
-exec_always {
-  pkill kanshi
-  kanshi &
 }
 
 exec swaync
