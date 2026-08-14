@@ -45,11 +45,11 @@ if [[ -d $USER_ZSH_CONFIG ]]; then
   done
 fi
 
+{{ if eq .chezmoi.osRelease.id "ubuntu" }}
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+{{ else }}
 source /usr/share/fzf/shell/key-bindings.zsh
-
-eval "$(mise activate zsh)"
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+{{ end }}
 
 (( $+commands[mise] )) && eval "$(mise activate zsh)"
 (( $+commands[starship] )) && eval "$(starship init zsh)"
