@@ -21,10 +21,16 @@
 	default = current
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    navigate = true
+  navigate = true
+  line-numbers = true
+  plus-style             = "syntax \"#204A28\""
+  plus-emphasized-style  = "syntax \"#2F6B3A\""
+  minus-style            = "syntax \"#3A1D1D\""
+  minus-emphasized-style = "syntax \"#5A2A2A\""
+  dark = true
 
 [color]
 	ui = true
