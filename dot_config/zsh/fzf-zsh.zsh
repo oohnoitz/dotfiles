@@ -10,19 +10,15 @@ nuke() {
 
 cdw() {
   local dir
-  dir=$(ls -D ~/src/work | fzf)
+
+  if [[ -d ~/src/work ]]; then
+    dir=$(ls -D ~/src/work | fzf)
+  else
+    dir=$(ls -D /workspace | fzf)
+  fi
 
   if [[ $dir ]]; then
     cd ~/src/work/$dir
-  fi
-}
-
-cdws() {
-  local dir
-  dir=$(ls -D /workspace | fzf)
-
-  if [[ $dir ]]; then
-    cd /workspace/$dir
   fi
 }
 
