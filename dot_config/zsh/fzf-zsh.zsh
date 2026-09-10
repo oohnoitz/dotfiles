@@ -17,6 +17,15 @@ cdw() {
   fi
 }
 
+cdws() {
+  local dir
+  dir=$(ls -D /workspace | fzf)
+
+  if [[ $dir ]]; then
+    cd /workspace/$dir
+  fi
+}
+
 cdp() {
   local dir
   dir=$(ls -D ~/src/personal | fzf)
