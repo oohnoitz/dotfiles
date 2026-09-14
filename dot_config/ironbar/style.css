@@ -1,0 +1,132 @@
+* {
+    border: none;
+    padding: 0;
+    font-family: FontAwesome, "Symbols Nerd Font Mono", "JetBrainsMono Nerd Font";
+    font-size: 12px;
+}
+
+
+/* Kanagawa Wave palette
+ * bg0       #1F1F28
+ * bg1       #2A2A37
+ * bg2       #223249
+ * fg        #DCD7BA
+ * gray      #727169
+ * blue      #7E9CD8
+ * cyan      #7FB4CA
+ * green     #98BB6C
+ * yellow    #E6C384
+ * orange    #FFA066
+ * red       #E46876
+ */
+
+/* Workspaces */
+
+.workspaces {
+    margin-right: 8px;
+    padding: 0;
+    background: #1F1F28;
+}
+
+.workspaces .item {
+    padding: 5px 8px;
+    border-radius: 0;
+    color: #727169;
+    background: transparent;
+    font-size: 18px;
+}
+
+.workspaces .item.focused {
+    color: #DCD7BA;
+    background: #2A2A37;
+}
+
+.workspaces .item.visible {
+    color: #7E9CD8;
+}
+
+.workspaces .item.urgent {
+    color: #E46876;
+}
+
+.workspaces .item:hover {
+    box-shadow: none;
+    text-shadow: none;
+    color: #1F1F28;
+    background: #7E9CD8;
+}
+
+
+/* Sway mode */
+
+.bindmode {
+    padding-left: 16px;
+    padding-right: 16px;
+    color: #E6C384;
+    background: #1F1F28;
+    font-style: italic;
+}
+
+
+/* Focused window */
+
+.focused {
+    margin: 0 4px;
+    font-weight: 800;
+    color: #DCD7BA;
+    background: transparent;
+}
+
+
+/* Right-side modules */
+
+.volume,
+.network_manager,
+.sys_info,
+.clock {
+    padding: 0 16px;
+    color: #DCD7BA;
+    background: #1F1F28;
+}
+
+
+.tray {
+    color: #DCD7BA;
+    background: #1F1F28;
+}
+
+
+/* Optional subtle separation */
+
+.volume:hover,
+.network_manager:hover,
+.sys_info:hover,
+.clock:hover {
+    background: #2A2A37;
+}
+
+.popup {
+  padding: 12px;
+
+}
+
+
+/* Volume */
+
+
+
+.tray .item {
+    padding: 0 12px;
+    background: transparent;
+}
+
+.tray .item:hover {
+    background: #2A2A37;
+}
+
+@keyframes blink {
+    to {
+        background: #DCD7BA;
+        color: #1F1F28;
+    }
+}

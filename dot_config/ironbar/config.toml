@@ -1,0 +1,18 @@
+position = "top"
+height = 30
+
+start = [
+  { type = "workspaces" },
+  { type = "focused", icon_size = 15 },
+]
+
+center = []
+
+end = [
+  { type = "bindmode" },
+  { type = "volume" },
+  { type = "network_manager" },
+  { type = "sys_info", class="sys_info", format = ["{cpu_percent}% "], interval.cpu = 1 },
+  { type = "clock", format = "%y.%m.%d %I:%M %p" },
+  { type = "tray", icon_size = 16 },
+]
