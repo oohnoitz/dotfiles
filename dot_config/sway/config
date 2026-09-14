@@ -1,4 +1,4 @@
-# Default config for sway
+# Default con.local/bin/fig for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
 #
@@ -13,12 +13,11 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term wezterm
-# set $file alacritty -e ranger
+
+set $term ghostty
 set $menu fuzzel
 
-bindsym $mod+Shift+m exec wlogout -p layer-shell
+bindsym $mod+Shift+m exec wlogout -p layer-shell --buttons-per-row 4
 
 default_border pixel 2
 hide_edge_borders smart
@@ -43,23 +42,8 @@ client.placeholder        $overlay0 $base      $text   $overlay0  $overlay0
 client.background         $base
 
 ### Output configuration
-output eDP-1 pos 0,0 res 2256x1504 scale 1
-# output DP-3 pos 2256,0 res 3840x2160 scale 1
 output * bg ~/background.jpg fill
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
 input "1:1:AT_Translated_Set_2_keyboard" {
   xkb_layout us
 }
@@ -67,27 +51,11 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 focus_follows_mouse no
 
 ### Key bindings
-#
-# Basics:
-#
-    # start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+Control+Return exec $term
-
-    # kill focused window
-    bindsym $mod+Shift+q kill
-
-    # start your launcher
-    bindsym $mod+space exec $menu
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
     floating_modifier $mod normal
 
-    # reload the configuration file
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+q kill
+    bindsym $mod+space exec $menu
     bindsym $mod+Shift+c reload
 
     bindsym XF86MonBrightnessUp exec brightnessctl -d amdgpu_bl1 s 10%+
@@ -104,26 +72,20 @@ focus_follows_mouse no
     bindsym Mod4+Shift+p exec grimshot save area
     bindsym Mod4+Mod1+p  exec grimshot save output
     bindsym Mod4+Ctrl+p  exec grimshot save window
-#
-# Moving around:
-#
-    # Move your focus around
+
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
-    # or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
 
-    # _move_ the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
     bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
@@ -137,7 +99,6 @@ focus_follows_mouse no
 #
 # Workspaces:
 #
-    # switch to workspace
     bindsym $mod+Tab workspace back_and_forth
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -149,7 +110,7 @@ focus_follows_mouse no
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
-    # move focused container to workspace
+
     bindsym $mod+Shift+1 move container to workspace 1
     bindsym $mod+Shift+2 move container to workspace 2
     bindsym $mod+Shift+3 move container to workspace 3
@@ -160,33 +121,22 @@ focus_follows_mouse no
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
-    # Make the current focus fullscreen
     bindsym $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+d floating toggle
-
-    # Swap focus between the tiling area and the floating area
     bindsym $mod+d focus mode_toggle
-
-    # move focus to the parent container
     bindsym $mod+a focus parent
+
 #
 # Scratchpad:
 #
@@ -199,6 +149,7 @@ focus_follows_mouse no
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
 #
 # Resizing containers:
 #
@@ -224,25 +175,25 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 
+#
+# Mouse:
+#
+bindsym $mod+Shift+g mode Mouse
 mode Mouse {
     bindsym a mode default, exec 'wl-kbptr-sway-active-win; swaymsg mode Mouse'
     bindsym Shift+a mode default, exec 'wl-kbptr; swaymsg mode Mouse'
 
-    # Mouse move
     bindsym h seat seat0 cursor move -15 0
     bindsym j seat seat0 cursor move 0 15
     bindsym k seat seat0 cursor move 0 -15
     bindsym l seat seat0 cursor move 15 0
 
-    # Left button
     bindsym s seat seat0 cursor press button1
     bindsym --release s seat seat0 cursor release button1
 
-    # Middle button
     bindsym d seat seat0 cursor press button2
     bindsym --release d seat seat0 cursor release button2
 
-    # Right button
     bindsym f seat seat0 cursor press button3
     bindsym --release f seat seat0 cursor release button3
 
@@ -250,32 +201,7 @@ mode Mouse {
 }
 
 bindsym $mod+g exec wl-kbptr-sway-active-win -o modes=floating','click -o mode_floating.source=detect
-bindsym $mod+Shift+g mode Mouse
 bindsym $mod+Shift+n exec swaync-client -t -sw
-
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    swaybar_command waybar
-}
-
-assign [app_id="discord"] workspace number 9
-assign [app_id="slack"] workspace number 10
-
-workspace 1 output DP-1
-workspace 2 output DP-1
-workspace 3 output DP-1
-workspace 4 output DP-1
-workspace 5 output DP-1
-workspace 6 output eDP-3
-workspace 7 output eDP-3
-workspace 8 output eDP-3
-workspace 9 output eDP-3
-workspace 10 output eDP-3
 
 for_window [app_id="showmethekey-gtk"] {
   floating enable
@@ -285,6 +211,9 @@ for_window [app_id="showmethekey-gtk"] {
 for_window [app_id="Zoom Workplace"] {
   floating enable
 }
+
+exec_always systemctl --user restart shikane.service
+exec_always .local/bin/ironbar
 
 exec swaync
 
