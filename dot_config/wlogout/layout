@@ -1,0 +1,24 @@
+{
+  "label": "lock",
+  "action": "swaylock -f",
+  "text": "Lock",
+  "keybind": "l"
+}
+{
+  "label": "switch",
+  "action": "busctl --system call org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat SwitchToGreeter",
+  "text": "Switch User",
+  "keybind": "w"
+}
+{
+  "label": "reboot",
+  "action": "systemctl reboot",
+  "text": "Reboot",
+  "keybind": "r"
+}
+{
+  "label": "shutdown",
+  "action": "systemctl poweroff",
+  "text": "Shutdown",
+  "keybind": "s"
+}
